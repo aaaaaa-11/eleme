@@ -1,0 +1,27 @@
+.login {
+  padding: 40px;
+  &-logo {
+    width: 40%;
+    margin: $space-md auto $space-primary;
+    border-radius: 5px;
+    img {
+      width: 100%;
+    }
+  }
+  &-form {
+    .float--left {
+      width: 60%;
+    }
+  }
+  &-button {
+    margin: $space-md auto;
+    .van-button {
+      height: 42px !important;
+      line-height: 42px !important;
+      border-radius: 4px;
+    }
+  }
+  &-about {
+    font-size: $font-size - 2;
+  }
+}

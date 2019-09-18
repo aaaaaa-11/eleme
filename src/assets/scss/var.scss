@@ -1,0 +1,19 @@
+$color-primary: #2395ff; // 主色
+$color-warning: #ffd01e; // 警告
+$color-error: #ee0a24;
+$color-success: #07c160;
+$color-info: #7d7e80; // 说明色 
+$color-border: #ddd;
+
+$color-text-primary: #333; // 字体色
+$color-text-gray: #ccc; // 字体色
+
+$font-size: 14px;
+
+$space-primary: 10px;
+$space-md: 15px;
+$space-lg: 20px;
+$space-sm: 8px;
+$space-xs: 5px;
+
+$text-color: (primary, $color-primary), (error, $color-error), (info, $color-info), (warning, $color-warning), (success, $color-success);
