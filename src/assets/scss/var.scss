@@ -7,6 +7,7 @@ $color-border: #ddd;
 
 $color-text-primary: #333; // 字体色
 $color-text-gray: #ccc; // 字体色
+$background-color: #f5f5f5; // 背景色
 
 $font-size: 14px;
 
@@ -16,4 +17,11 @@ $space-lg: 20px;
 $space-sm: 8px;
 $space-xs: 5px;
 
+$font-family: PingFang SC,Helvetica Neue,Arial,sans-serif;
+
 $text-color: (primary, $color-primary), (error, $color-error), (info, $color-info), (warning, $color-warning), (success, $color-success);
+
+:export {
+  fontSize: $font-size;
+  primaryColor: $color-primary;
+}
