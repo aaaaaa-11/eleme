@@ -1,68 +1,95 @@
 <template>
   <div :class="prefixCls">
-    <header :class="`${prefixCls}-header`">
-      <div :class="`${prefixCls}-logo`">
+    <!-- header -->
+    <div :class="`${prefixCls}-header float`">
+      <div :class="`${prefixCls}-header__img float--left`">
         <img src="../../assets/imgs/user/logo.png" alt="">
       </div>
-      <div :class="`${prefixCls}-title`">
-        <h1>登录/注册</h1>
-        <p>登陆后享受更多特权</p>
+      <div :class="`${prefixCls}-header__title float--left`">
+        <h3>登录/注册</h3>
+        <p>
+          <van-icon name="bookmark-o" />
+          <span>登陆后享受更多特权</span>
+        </p>
       </div>
-      <van-icon name="arrow" :class="`${prefixCls}-arrow`"/>
-    </header>
-    <div class="body">
-      <div class="money">
-        <div>
-          <img src="../../assets/imgs/user/icon1.jpg">
-          <p>红包</p>
-        </div>
-        <div>
-          <img src="../../assets/imgs/user/icon2.jpg">
-          <p>金币</p>
-        </div>
-      </div>
-      <div class="main">
-        <section>
-          <div class="item">
-            <img src="../../assets/imgs/user/icon3.jpg">
-            <span>我的地址</span>
-            <van-icon name="arrow" :class="`${prefixCls}-arrow`"/>
-          </div>
-        </section>
-        <section>
-          <div class="item">
-            <img src="../../assets/imgs/user/icon4.jpg">
-            <span>金币商城</span>
-            <van-icon name="arrow" :class="`${prefixCls}-arrow`"/>
-          </div>
-          <div class="item">
-            <img src="../../assets/imgs/user/icon5.jpg">
-            <span>分享拿20元现金</span>
-            <van-icon name="arrow" :class="`${prefixCls}-arrow`"/>
-          </div>
-        </section>
-        <section>
-          <div class="item">
-            <img src="../../assets/imgs/user/icon6.jpg">
-            <span>我的客服</span>
-            <van-icon name="arrow" :class="`${prefixCls}-arrow`"/>
-          </div>
-          <div class="item">
-            <img src="../../assets/imgs/user/icon7.jpg">
-            <span>下载饿了么APP</span>
-            <van-icon name="arrow" :class="`${prefixCls}-arrow`"/>
-          </div>
-          <div class="item">
-            <img src="../../assets/imgs/user/icon8.jpg">
-            <span>规则中心</span>
-            <van-icon name="arrow" :class="`${prefixCls}-arrow`"/>
-          </div>
-        </section>
-      </div>
-      <div class="footer">
-        <a class="text--primary text--center">隐私政策</a>
+      <div :class="`${prefixCls}-header__arrow`">
+        <van-icon name="arrow" />
       </div>
     </div>
+    <!-- 红包 -->
+    <div :class="`${prefixCls}-money flex box`">
+      <div class="flex-item text--center">
+        <p><img src="../../assets/imgs/user/icon1.jpg" alt=""></p>
+        <p>红包</p>
+      </div>
+      <div class="flex-item text--center">
+        <p><img src="../../assets/imgs/user/icon2.jpg" alt=""></p>
+        <p>金币</p>
+      </div>
+    </div>
+
+    <div :class="`${prefixCls}-list`">
+      <van-cell-group>
+        <van-cell title="我的地址" is-link>
+          <div slot="icon">
+            <img src="../../assets/imgs/user/icon3.jpg" alt="">
+          </div>
+        </van-cell>
+      </van-cell-group>
+      <van-cell-group>
+        <van-cell title="金币商城" is-link>
+          <div slot="icon">
+            <img src="../../assets/imgs/user/icon4.jpg" alt="">
+          </div>
+        </van-cell>
+        <van-cell title="分享拿20元现金" is-link>
+          <div slot="icon">
+            <img src="../../assets/imgs/user/icon5.jpg" alt="">
+          </div>
+        </van-cell>
+      </van-cell-group>
+      <van-cell-group>
+        <van-cell title="金币商城" is-link>
+          <div slot="icon">
+            <img src="../../assets/imgs/user/icon6.jpg" alt="">
+          </div>
+        </van-cell>
+        <van-cell title="下载饿了么APP" is-link>
+          <div slot="icon">
+            <img src="../../assets/imgs/user/icon7.jpg" alt="">
+          </div>
+        </van-cell>
+        <van-cell title="规则中心" is-link>
+          <div slot="icon">
+            <img src="../../assets/imgs/user/icon8.jpg" alt="">
+          </div>
+        </van-cell>
+      </van-cell-group>
+    </div>
+
+    <div class="profile text--center">
+      <p>隐私政策</p>
+    </div>
+    <!-- <div :class="`group box`">
+      <div :class="`group-list flex`">
+        <div :class="`group-list__icon`">
+          <img src="../../assets/imgs/user/icon3.jpg" alt="">
+        </div>
+        <div :class="`group-list__title flex-item`">我的地址</div>
+        <div :class="`group-list--right text--info`">
+          <van-icon name="arrow" />
+        </div>
+      </div>
+      <div :class="`group-list flex`">
+        <div :class="`group-list__icon`">
+          <img src="../../assets/imgs/user/icon3.jpg" alt="">
+        </div>
+        <div :class="`group-list__title flex-item`">我的地址</div>
+        <div :class="`group-list--right text--info`">
+          <van-icon name="arrow" />
+        </div>
+      </div>
+    </div> -->
   </div>
 </template>
 <script>

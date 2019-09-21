@@ -28,73 +28,66 @@
 
 .user {
   &-header {
-    padding: 30px 20px;
-    background: $color-primary;
-    color: white;
-    display: flex;
-    align-items: center;
-  }
-  &-logo {
-    width: 25%;
-    img {
+    padding: $space-lg;
+    position: relative;
+    background-color: $color-primary;
+    * {
+      color: #fff;
+    }
+    &__img {
+      width: 10vh;
+      height: 10vh;
       border-radius: 50%;
-      width: 100%;
-    }
-  }
-  &-title {
-    margin-left: 20px;
-    h1 {
-      margin-bottom: 5px;
-    }
-  }
-  &-arrow {
-    position: absolute;
-    right: 5%;
-    color: $color-text-gray;
-  }
-  .body {
-    font-family: $font-family;
-    .money {
-      background: white;
-      font-size: $font-size;
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 20px 0;
-      border-bottom: $border;
+      overflow: hidden;
       img {
-        width: 35%;
-      }
-    }
-    .main {
-      font-size: 16px;
-      section {
-        background: white;
         width: 100%;
-        display: flex;
-        flex-flow: column;
-        margin-top: 10px;
-        border-bottom: $border;
-        border-top: $border;
-        .item {
-          width: 100%;
-          padding: 10px 0;
-          display: flex;
-          align-items: center;
-        }
-      }
-      img {
-        width: 6%;
-        margin: 0 10px;
       }
     }
-    .footer {
-      padding-top: 20px;
-      background: $background-color;
-      a {display: block;}
+    &__title {
+      width: 60%;
+      margin-left: $space-lg;
+      h3 {
+        font-size: $font-size-auto * 2;
+      }
+      i {
+        vertical-align: middle;
+      }
     }
+    &__arrow {
+      position: absolute;
+      right: $space-md;
+      top: 50%;
+      transform: translate(0, -50%);
+      color: $color-info;
+    }
+  }
+  &-money {
+    img {
+      width: 30px;
+    }
+    .flex-item {
+      padding: $space-lg 0;
+    }
+    .flex-item:first-child{
+      border-right: $border;
+    }
+  }
+  &-list {
+    img {
+      width: 20px;
+      margin-right: $space-primary;
+      vertical-align: middle;
+    }
+  }
+  .van-cell-group {
+    margin-top: $space-primary;
+  }
+  .profile {
+    color: $color-primary;
+    padding-top: 20px;
   }
 }
+
 body {
   background: $background-color;
 }
