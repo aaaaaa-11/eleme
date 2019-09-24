@@ -92,3 +92,304 @@ body {
   background: $background-color;
 }
 .money, section {cursor: pointer;}
+
+.home-index {
+  &-header {
+    background-color: $color-primary;
+    &__title {
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      padding: $space-md $space-md $space-primary;
+      color: #fff;
+      h3 {
+        max-width: 50%;
+        margin-left: 3px;
+        font-size: bold;
+      }
+      span:last-child {
+        border: 4px solid transparent;
+        border-top-color: #fff;
+        position: relative;
+        top: 4px;
+      }
+    }
+    &__search {
+      padding: $space-primary;
+      background-color: $color-primary;
+      div{
+        border-radius: 2px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        color: $color-text-gray;
+        span {
+          padding: $space-primary;
+        }
+      }
+    }
+  }
+  &-swipe {
+    background-color: #fff;
+    width: 100%;
+    .van-grid {
+      border: none;
+    }
+    .van-swipe__indicators {
+      position: relative;
+      justify-content: center;
+      bottom: auto;
+      padding: $space-primary;
+      .van-swipe__indicator {
+        width: 10px;
+        height: 2px;
+        background-color: $color-info;
+      }
+      .van-swipe__indicator--active {
+        background-color: $color-warning;
+      }
+      .van-swipe__indicator:not(:last-child) {
+        margin-right: 4px;
+      }
+    }
+    &-list {
+      width: 100%;
+      .van-hairline--top, .van-hairline--top-bottom {
+        float: left;
+        width: 20%;
+      }
+      &__item {
+        box-sizing: border-box;
+        padding: 0 $space-primary;
+        flex-basis: auto !important;
+        .van-grid-item__content {
+          padding: 5px $space-primary;
+        }
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+  &-handle {
+    background-color: #fff;
+    padding: 0 $space-primary;
+    &-content {
+      background-color: $background-color;
+      padding: $space-primary;
+      padding-left: $space-md;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3px;
+      &__desc {
+        padding-top: $space-primary;
+        p:first-child {
+          font-weight: bold;
+          font-size: $font-lg;
+        }
+        p:last-child {
+          font-size: $font-md;
+          color: $color-warning;
+          font-weight: bold;
+          .van-icon-arrow {
+            vertical-align: middle;
+          }
+        }
+      }
+      &__img {
+        width: 40%;
+        img {width: 100%;}
+      }
+    }
+    &-wrap {
+      position: relative;
+      padding: $space-primary;
+      display: flex;
+      align-items: center;
+      background-color: $background-yellow;
+      p {
+        padding-left: 5px;
+      }
+      span {
+        padding-left: 5px;
+      }
+      .span-right {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+  &-shop {
+    padding: 0 $space-primary;
+    background-color: #fff;
+    margin-bottom: 50px;
+    &-recommend {
+      p {
+        padding: $space-md 0;
+        &::after, &::before {
+          content: '';
+          display: inline-block;
+          width: $space-lg;
+          border-top: 1px solid #000;
+          margin-right: $space-md;
+          position: relative;
+          top: -4px;
+        }
+        &::after {
+          padding-right: 0;
+          margin-left: $space-md;
+        }
+      }
+    }
+    &-list {
+      section {
+        padding: $space-lg 0;
+        border-bottom: $border;
+        img {width: 20%;}
+        &::after {
+          content: '';
+          display: block;
+          clear: both;
+        }
+      }
+      &__content {
+        float: right;
+        width: 80%;
+        padding-left: $space-primary;
+        box-sizing: border-box;
+        p {
+          font-size: $font-sm;
+          margin-bottom: $space-primary;
+        }
+        .shop-title { // 商家名称
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          p:first-child {
+            font-size: $font-ml;
+            font-weight: bold;
+            max-width: 80%;
+          }
+          // 弹出层-不喜欢
+          .van-cell {
+            padding: 0;
+            width: auto;
+          }
+          .van-overlay {
+            height: 30%;
+            transform: translate(0, 100%);
+            top: 25px;
+          }
+          .van-popup {
+            font-size: $font-md;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+          }
+        }
+        .van-rate { // 评分
+          margin-bottom: $space-primary;
+        }
+        .add {
+          margin: 0 3px;
+          border: 1px solid #ccc;
+          padding: 1px 2px;
+          border-radius: 1px;
+        }
+        .activites { // 活动
+          border-top: $border;
+          margin-top: $space-primary;
+          p {
+            margin: 5px 0;
+            span {
+              background-color: $color-error;
+              color: #fff;
+              padding: 2px;
+              margin-right: 3px;
+              border-radius: 2px;
+            }
+          }
+        }
+      }
+    }
+    &-nav {
+      position: sticky;
+      top: 59px;
+      z-index: 100;
+      padding: $space-lg 0;
+      background-color: #fff;
+      ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-around;
+        line-height: 40px;
+        font-size: 16px;
+        li {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         .van-dropdown-menu {
+           height: auto;
+           .van-dropdown-menu__title {
+             font-weight: bold;
+            }
+            .van-dropdown-item__option--active, .van-dropdown-item__option--active .van-dropdown-item__icon {
+              color: $color-primary;
+            }
+         }
+         a {
+           color: $color-info;
+           .van-icon-filter-o {
+             top: 2px;
+           }
+         }
+       }
+      }
+      &--active {
+        font-weight: bold;
+      }
+    }
+  }
+  &-toTop {
+    position: fixed;
+    bottom: 100px;
+    right: $space-lg;
+    width: 44px;
+    height: 44px;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: $space-primary;
+    box-sizing: border-box;
+    border: $border;
+    img {
+      width: 100%;
+    }
+  }
+}
+.van-grid-item__content::after {border: none;}
+.font-sm {
+  font-size: $font-sm;
+}
+.font-lg {
+  font-size: $font-lg;
+}
+// 拥有active的class会显示
+// .active {
+//   display: block;
+// }
+// 超出文字以省略号形式显示
+.text-overflow {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
+  -webkit-box-orient: vertical; /* 垂直排列 */
+  word-break: break-all;  /* 内容自动换行 */
+}

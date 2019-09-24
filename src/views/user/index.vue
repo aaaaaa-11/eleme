@@ -1,7 +1,7 @@
 <template>
   <div :class="prefixCls">
     <!-- header -->
-    <div :class="`${prefixCls}-header float`">
+    <div :class="`${prefixCls}-header float`" @click="go2Login">
       <div :class="`${prefixCls}-header__img float--left`">
         <img src="../../assets/imgs/user/logo.png" alt="">
       </div>
@@ -103,6 +103,17 @@ export default {
   computed: {},
   watch: {},
   methods: {
+    go2Login() {
+      this.$router.push({
+        name: 'login',
+        params: {
+          data: 1
+        },
+        query: {
+          data: 1,
+        }
+      });
+    }
   },
   created() {
   },

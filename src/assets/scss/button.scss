@@ -1,0 +1,24 @@
+.v-button {
+  border: none;
+  padding: 0 $space-lg;
+  background: #fff;
+  height: 30px;
+  line-height: 30px;
+  
+  &--error {
+    background-color: $color-error;
+    color: #fff;
+  }
+  &--primary {
+    background-color: $color-primary;
+    color: #fff;
+  }
+  &--success {
+    background-color: $color-success;
+    color: #fff;
+  }
+  &--block {
+    // display: block;
+    width: 100%;
+  }
+}
