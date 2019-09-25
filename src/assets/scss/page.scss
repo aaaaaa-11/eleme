@@ -95,12 +95,12 @@ body {
 
 .home-index {
   &-header {
-    background-color: $color-primary;
+    background-image: linear-gradient(90deg, #0af, $color-primary);
     &__title {
       display: -webkit-flex;
       display: flex;
       align-items: center;
-      padding: $space-md $space-md $space-primary;
+      padding: $space-md $space-md 0;
       color: #fff;
       h3 {
         max-width: 50%;
@@ -116,7 +116,7 @@ body {
     }
     &__search {
       padding: $space-primary;
-      background-color: $color-primary;
+      background-image: linear-gradient(90deg, #0af, $color-primary);
       div{
         border-radius: 2px;
         display: flex;
@@ -125,7 +125,8 @@ body {
         background-color: #fff;
         color: $color-text-gray;
         span {
-          padding: $space-primary;
+          padding: $space-primary 5px;
+          font-size: 0.83rem;
         }
       }
     }
@@ -133,7 +134,12 @@ body {
   &-swipe {
     background-color: #fff;
     width: 100%;
+    font-size: $font-sm;
+    color: $color-info;
     .van-grid {
+      border: none;
+    }
+    [class*=van-hairline]::after {
       border: none;
     }
     .van-swipe__indicators {
@@ -164,10 +170,14 @@ body {
         padding: 0 $space-primary;
         flex-basis: auto !important;
         .van-grid-item__content {
-          padding: 5px $space-primary;
+          padding: 3px 5px;
         }
         img {
+          padding-bottom: 5px;
           width: 100%;
+        }
+        p {
+          color: #666;
         }
       }
     }
@@ -176,7 +186,7 @@ body {
     background-color: #fff;
     padding: 0 $space-primary;
     &-content {
-      background-color: $background-color;
+      background-image: linear-gradient(0deg, $background-color, #fafafa);
       padding: $space-primary;
       padding-left: $space-md;
       display: flex;
@@ -184,11 +194,16 @@ body {
       margin-bottom: 3px;
       &__desc {
         padding-top: $space-primary;
+        p {
+          font-size: 13px;
+        }
         p:first-child {
           font-weight: bold;
           font-size: $font-lg;
+          padding-bottom: 3px;
         }
         p:last-child {
+          padding-top: 7px;
           font-size: $font-md;
           color: $color-warning;
           font-weight: bold;
@@ -203,25 +218,30 @@ body {
       }
     }
     &-wrap {
+      border-radius: 2px;
       position: relative;
       padding: $space-primary;
       display: flex;
       align-items: center;
-      background-color: $background-yellow;
+      background-image: -webkit-linear-gradient(left top, #ffefc4, $background-yellow);
+      color: #644f1b;
       p {
         padding-left: 5px;
+      }
+      .bold {
+        font-weight: 700;
+        font-size: 0.83rem;
       }
       span {
         padding-left: 5px;
       }
       .span-right {
         position: absolute;
-        right: 0;
+        right: 5px;
       }
     }
   }
   &-shop {
-    padding: 0 $space-primary;
     background-color: #fff;
     margin-bottom: 50px;
     &-recommend {
@@ -244,9 +264,18 @@ body {
     }
     &-list {
       section {
+        .img {
+          width: 23%;
+          padding-left: $space-primary;
+          box-sizing: border-box;
+          float: left;
+          img {
+            width: 100%;
+            border: $border;
+          }
+        }
         padding: $space-lg 0;
         border-bottom: $border;
-        img {width: 20%;}
         &::after {
           content: '';
           display: block;
@@ -254,10 +283,12 @@ body {
         }
       }
       &__content {
-        float: right;
-        width: 80%;
-        padding-left: $space-primary;
         box-sizing: border-box;
+        float: right;
+        width: 77%;
+        padding: 0 $space-primary;
+        box-sizing: border-box;
+        color: $color-info;
         p {
           font-size: $font-sm;
           margin-bottom: $space-primary;
@@ -266,10 +297,11 @@ body {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          p:first-child {
-            font-size: $font-ml;
+          p:first-child { // 商家标题
+            font-size: $font-size;
             font-weight: bold;
             max-width: 80%;
+            color: $color-text-primary;
           }
           // 弹出层-不喜欢
           .van-cell {
@@ -300,7 +332,7 @@ body {
           border-radius: 1px;
         }
         .activites { // 活动
-          border-top: $border;
+          border-top: $border-dashed;
           margin-top: $space-primary;
           p {
             margin: 5px 0;

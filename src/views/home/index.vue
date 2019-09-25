@@ -57,7 +57,7 @@
       </div>
       <div :class="`${prefixCls}-handle-wrap`">
         <van-icon name="vip-card" />
-        <p>超级会员</p>
+        <p class="bold">超级会员</p>
         <span>·</span>
         <p class="font-sm">每月领20元红包</p>
         <span class="font-sm span-right">立即开通
@@ -86,7 +86,9 @@
       </div>
       <div :class="`${prefixCls}-shop-list`" v-for="(item, i) in shopList" :key="i" ref="shopList">
         <section>
-          <img src="../../assets/imgs/home/shop1.webp" alt="">
+          <div class="img">
+            <img src="../../assets/imgs/home/shop1.webp" alt="">
+          </div>
           <div :class="`${prefixCls}-shop-list__content`">
             <div class="shop-title">
               <p class="text-overflow">{{ item.title }}</p>
@@ -95,7 +97,7 @@
             </div>
             <van-rate :size="10" v-model="item.score" readonly />
             <p>￥{{ item.min }}起送|夜间配送费￥{{ item.night }}
-              <span>{{ item.distance }}km | {{ item.time }}分钟</span>
+              <span class="float--right">{{ item.distance }}km | {{ item.time }}分钟</span>
             </p>
             <span class="add font-sm" v-for="(i, idx) in item.add" :key="idx">{{ i }}</span>
             <div class="activites">
