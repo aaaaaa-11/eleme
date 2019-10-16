@@ -20,11 +20,11 @@
     <div :class="`${prefixCls}-money flex box`">
       <div class="flex-item text--center">
         <p><img src="../../assets/imgs/user/icon1.jpg" alt=""></p>
-        <p>红包</p>
+        <p class="font-sm">红包</p>
       </div>
       <div class="flex-item text--center">
         <p><img src="../../assets/imgs/user/icon2.jpg" alt=""></p>
-        <p>金币</p>
+        <p class="font-sm">金币</p>
       </div>
     </div>
 

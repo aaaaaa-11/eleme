@@ -47,10 +47,14 @@
       width: 60%;
       margin-left: $space-lg;
       h3 {
-        font-size: $font-size-auto * 2;
+        font-size: $font-size-auto * 1.55;
+        margin-bottom: $space-sm;
       }
-      i {
-        vertical-align: middle;
+      p {
+        font-size: $font-md;;
+        i {
+          vertical-align: middle;
+        }
       }
     }
     &__arrow {
@@ -71,16 +75,27 @@
     .flex-item:first-child{
       border-right: $border;
     }
+    .font-sm {
+      font-size: $font-md;
+      font-weight: bold;
+    }
   }
   &-list {
     img {
-      width: 20px;
+      width: 22px;
       margin-right: $space-primary;
       vertical-align: middle;
     }
   }
   .van-cell-group {
     margin-top: $space-primary;
+    .van-cell__title {
+      font-size: 16px;
+    }
+    i {
+      font-size: 13px;
+      color: #bbb;
+    }
   }
   .profile {
     color: $color-primary;
@@ -126,7 +141,7 @@ body {
         color: $color-text-gray;
         span {
           padding: $space-primary 5px;
-          font-size: 0.83rem;
+          font-size: $font-rem;
         }
       }
     }
@@ -230,7 +245,7 @@ body {
       }
       .bold {
         font-weight: 700;
-        font-size: 0.83rem;
+        font-size: $font-rem;
       }
       span {
         padding-left: 5px;
@@ -406,6 +421,135 @@ body {
   }
 }
 .van-grid-item__content::after {border: none;}
+
+.find {
+  &-parts {
+    border-top: $border;
+    border-bottom: $border;
+    .van-row .van-col--12 {
+      border-left: $border;
+    }
+    .content {
+      padding: $space-lg $space-md;
+      p.font--md {
+        color: $color-info;
+        margin-top: $space-xs;
+      }
+    }
+    .img {
+      width: 12vw;
+      margin-right: $space-md;
+      img {
+        width: 100%;
+      }
+    }
+    &__shopcity {
+      .img {
+        width: 20vw;
+        img {
+          width: 100%;
+        }
+      }
+    }
+    &__right {
+      flex-direction: column;
+      justify-content: space-between;
+      &--recommend {
+        border-bottom: $border;
+      }
+      &--recommend, &--around {
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+  &-activities {
+    border-top: $border;
+    border-bottom: $border;
+    margin-top: $space-primary;
+    flex-direction: column;
+    align-items: center;
+    padding: $space-lg $space-md;
+    &__title {
+      p.font--lg {
+        font-weight: bold;
+        align-items: center;
+        span {
+          width: $space-xs;
+          height: $space-xs;
+          background: $color-text-primary;
+          border-radius: 50%;
+          display: block;
+        }
+        .next {
+          margin-left: $space-xs;
+        }
+        span.prev::before,span.next::after {
+          content: '';
+          width: $space-md;
+          height: 2px;
+          display: block;
+          background: $color-text-primary;
+          position: relative;
+          top: 1px;
+        }
+        span.prev::before {
+          left: -$space-xs - $space-sm;
+        }
+        i {
+          color: $color-error;
+          padding: 0 $space-xs;
+        }
+      }
+      p.font--md {
+        color: $color-info;
+      }
+    }
+    &__content {
+      .van-row {
+        font-size: 13px;
+        .van-cell {
+          padding: 0;
+          padding-top: $space-lg;
+        }
+        .van-cell__title span {
+          background-color: $color-text-primary;
+          color: #fff;
+          font-size: $font-md;
+        }
+        .van-cell:not(:last-child)::after {
+          display: none;
+        }
+        .van-panel__content {
+          padding-right: $space-xs;
+          img {
+            width: 100%;
+            margin-bottom: $space-lg;
+          }
+          p.gold {
+            color: $color-error;
+            padding-top: $space-primary;
+            span {
+              text-decoration: line-through;
+              color: $color-info;
+              font-size: $font-sm;
+              padding-left: $space-xs;
+            }
+          }
+        }
+      }
+    }
+    &__more {
+      padding-top: 30px;
+      font-size: 13px;
+      color: $color-info;
+      i {
+        vertical-align: middle;
+        font-size: $font-sm;
+      }
+    }
+  }
+}
 .font-sm {
   font-size: $font-sm;
 }
@@ -416,12 +560,3 @@ body {
 // .active {
 //   display: block;
 // }
-// 超出文字以省略号形式显示
-.text-overflow {
-  overflow : hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
-  -webkit-box-orient: vertical; /* 垂直排列 */
-  word-break: break-all;  /* 内容自动换行 */
-}

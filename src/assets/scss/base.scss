@@ -21,6 +21,19 @@ input{
   text-align: right;
 }
 
+.font--sm {
+  font-size: $font-sm;
+}
+.font--md {
+  font-size: $font-md;
+}
+.font--ml {
+  font-size: $font-ml;
+}
+.font--lg {
+  font-size: $font-lg;
+}
+
 .float {
   &--left {
     float: left;
@@ -62,7 +75,11 @@ input{
     flex: 1;
   }
 }
- 
+
+// 自定义border
+$border: 1px solid $color-border-base;
+$border-dashed: 1px dashed $color-border-base;
+
 .group {
   margin-top: $space-primary;
   border-top: $border;
@@ -87,4 +104,14 @@ input{
       }
     }
   }
+}
+
+// 超出文字以省略号形式显示
+.text-overflow {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* 限制在一个块元素显示的文本的行数 */
+  -webkit-box-orient: vertical; /* 垂直排列 */
+  word-break: break-all;  /* 内容自动换行 */
 }
