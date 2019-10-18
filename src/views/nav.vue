@@ -23,6 +23,7 @@ export default {
   methods: {
     onChange(event) {
       this.active = event;
+      console.log(event);
       switch (event) {
         case '0': // 首页
           this.$router.replace({
@@ -32,27 +33,44 @@ export default {
             }
           });
           break;
-        case '1': // 首页
+        case '1': // 发现
           this.$router.replace({
             path: '/find',
           });
           break;
-        case '2': // 首页
+        case '2': // 订单
           this.$router.replace({
             path: '/order',
           });
           break;
-        case '3': // 首页
+        case '3': // 我的
           this.$router.replace({
             path: '/user',
           });
           break;
         default: break;
       }
-      console.log(event);
+      // console.log(event);
     }
   },
   created() {
   },
+  mounted() { // 页面刷新时让当前路由对应的Tabbar高亮显示
+    switch (this.$route.fullPath) {
+      case '/home':
+        this.active = '0';
+        break;
+      case '/find':
+        this.active = '1';
+        break;
+      case '/order':
+        this.active = '2';
+        break;
+      case '/user':
+        this.active = '3';
+        break;
+      default: break;
+    }
+  }
 }
 </script>

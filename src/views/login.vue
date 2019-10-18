@@ -56,10 +56,10 @@ export default {
     }
   },
   created() {
-    console.log(this.$route);
+    // console.log(this.$route);
   },
   mounted() {
-    console.log(this.$refs);
+    // console.log(this.$refs);
   }
 }
 </script>

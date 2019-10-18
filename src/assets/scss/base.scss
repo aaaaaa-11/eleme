@@ -115,3 +115,11 @@ $border-dashed: 1px dashed $color-border-base;
   -webkit-box-orient: vertical; /* 垂直排列 */
   word-break: break-all;  /* 内容自动换行 */
 }
+
+// 小三角
+span.trangle {
+  border: 4px solid transparent;
+  border-top-color: #fff;
+  position: relative;
+  top: 4px;
+}

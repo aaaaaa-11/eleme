@@ -1,4 +1,15 @@
+body {
+  background: $background-color;
+}
+.nav {
+  .van-tabbar {
+    z-index: 100 !important;
+  }
+}
 .login {
+  background-color: #fff;
+  height: 100vh;
+  box-sizing: border-box;
   padding: 40px;
   &-logo {
     width: 40%;
@@ -103,12 +114,17 @@
   }
 }
 
-body {
-  background: $background-color;
-}
+
 .money, section {cursor: pointer;}
 
+// 首页
 .home-index {
+  // 一屏高
+  .unscrollable {
+    height: 100vh;
+    overflow: hidden;
+  }
+  // 首页
   &-header {
     background-image: linear-gradient(90deg, #0af, $color-primary);
     &__title {
@@ -121,12 +137,6 @@ body {
         max-width: 50%;
         margin-left: 3px;
         font-size: bold;
-      }
-      span:last-child {
-        border: 4px solid transparent;
-        border-top-color: #fff;
-        position: relative;
-        top: 4px;
       }
     }
     &__search {
@@ -364,8 +374,8 @@ body {
     }
     &-nav {
       position: sticky;
-      top: 59px;
-      z-index: 100;
+      top: 57px;
+      z-index: 10;
       padding: $space-lg 0;
       background-color: #fff;
       ul {
@@ -419,8 +429,120 @@ body {
       width: 100%;
     }
   }
+  // 选择地址
+  &-address {
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: $background-color;
+    .van-nav-bar {
+      background-image: linear-gradient(90deg, #0af, $color-primary);
+      color: #fff;
+      .van-nav-bar__left {
+        left: $space-sm;
+        .van-icon {
+          color: #fff;
+          font-size: 25px;
+        }
+      }
+      .van-nav-bar__title {
+        font-size: $font-lg;
+        color: #fff;
+      }
+      .van-nav-bar__text {
+        color: #fff;
+        font-size: $font-ml;
+      }
+    }
+    &-search {
+      .city {
+        width: 20%;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 13px;
+        padding-left: $space-lg;
+        .trangle {
+          border: 3px solid transparent;
+          border-top-color: $color-text-primary;
+          top: 2px;
+          margin-left: 12px;
+        }
+      }
+      .van-search--show-action {
+        padding-right: $space-md;
+      }
+      .van-search {
+        width: 80%;
+        .van-search__content--round {
+          border-radius: 2px;
+        }
+        .van-search__content {
+          background-color: $background-color;
+          .van-cell {
+            font-size: $font-size-auto * 0.9;
+          }
+        }
+        .van-search__action {
+          display: none;
+        }
+      }
+    }
+    .title {
+      font-size: 13px;
+      padding: 12px;
+      border-top: $border;
+      border-bottom: $border;
+    }
+    &-currAddr {
+      &__content {
+        font-size: $font-size-auto * 1.1;
+        justify-content: space-between;
+        padding: $space-primary + 2;
+        p {
+          font-weight: bold;
+          width: 70%;
+        }
+        a {
+          color: $color-primary;
+          i {
+            vertical-align: sub;
+            margin-right: $space-xs;
+            font-size: $font-lg;
+          }
+        }
+      }
+    }
+    &-shAddr {
+      .list {
+        .list-item {
+          padding: $space-primary * 1.2 $space-md;
+          border-bottom: $border;
+          p {
+            font-size: $font-md;
+            :not(:first-child) {
+              margin-left: $space-xs;
+            }
+          }
+          .name {
+            font-size: $font-ml;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
 }
 .van-grid-item__content::after {border: none;}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translate(100vw, 0);
+}
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: all .3s linear;
+}
 
 .find {
   &-parts {
