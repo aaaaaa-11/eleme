@@ -11,10 +11,10 @@
         </div>
         <van-sticky>
         <div :class="`${prefixCls}-header__search`">
-          <div>
+          <router-link to="/search"><div>
             <van-icon name="search" />
             <span>搜索饿了么商家、商品名称</span>
-          </div>
+          </div></router-link>
         </div>
         </van-sticky>
       </div>
@@ -62,8 +62,10 @@
           <p class="bold">超级会员</p>
           <span>·</span>
           <p class="font-sm">每月领20元红包</p>
-          <span class="font-sm span-right">立即开通
-            <van-icon class="font-sm arrow-right" name="arrow" />
+          <span class="font-sm span-right">
+            <router-link to="/supervip">
+              立即开通<van-icon class="font-sm arrow-right" name="arrow" />
+            </router-link>
           </span>
         </div>
       </div>
@@ -124,77 +126,122 @@
     <!-- 选择收货地址 -->
     <transition name="slide-fade">
       <div v-if="showAddr" :class="`${prefixCls}-address`">
-        <!-- header -->
-        <van-nav-bar
-          title="选择收货地址"
-          right-text="新增地址"
-          left-arrow
-          @click-left="onClickLeft"
-          @click-right="onClickRight"
-        />
-        <!-- search -->
-        <div :class="`${prefixCls}-address-search box flex`">
-          <div class="city flex" slot="action">
-            <p class="text-overflow">啊啊啊啊城市</p>
-            <span class="trangle"></span>
+        <div :class="{'display-none': showcity}">
+          <!-- header -->
+          <van-nav-bar
+            title="选择收货地址"
+            right-text="新增地址"
+            left-arrow
+            @click-left="backToHome"
+            @click-right="addAddress"
+          />
+          <!-- search -->
+          <div :class="`${prefixCls}-address-search box flex`">
+            <div class="city flex" @click="showCity" slot="action">
+              <p class="text-overflow">啊啊啊啊城市</p>
+              <span class="trangle"></span>
+            </div>
+            <van-search placeholder="请输入地址" v-model="address" />
           </div>
-          <van-search
-            placeholder="请输入地址"
-            show-action
-            shape="round"
-          >
-          </van-search>
-        </div>
-        <!-- 当前地址 -->
-        <div :class="`${prefixCls}-address-currAddr`">
-          <p class="title">当前地址</p>
-          <div :class="`${prefixCls}-address-currAddr__content flex box`">
-            <p class="box text-overflow">啊啊啊啊啊啊啊啊啊啊啊test啊啊啊啊啊</p>
-            <a href="javascript:;"><van-icon name="aim" />重新定位</a>
+          <!-- 当前地址 -->
+          <div :class="`${prefixCls}-address-currAddr`">
+            <p class="title">当前地址</p>
+            <div :class="`${prefixCls}-address-currAddr__content flex box`">
+              <p class="box text-overflow">啊啊啊啊啊啊啊啊啊啊啊test啊啊啊啊啊</p>
+              <a href="javascript:;"><van-icon name="aim" />重新定位</a>
+            </div>
           </div>
-        </div>
-        <!-- 收货地址 -->
-        <div :class="`${prefixCls}-address-shAddr`">
-          <p class="title">收货地址</p>
-          <div class="list box">
-            <div class="list-item">
-              <p>
-                <span class="name">小明</span>
-                <span class="gender">男士</span>
-                <span class="phone">12345678901</span>
-              </p>
-              <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
-            </div>
-            <div class="list-item">
-              <p>
-                <span class="name">小明</span>
-                <span class="gender">男士</span>
-                <span class="phone">12345678901</span>
-              </p>
-              <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
-            </div>
-            <div class="list-item">
-              <p>
-                <span class="name">小明</span>
-                <span class="gender">男士</span>
-                <span class="phone">12345678901</span>
-              </p>
-              <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
-            </div>
-            <div class="list-item">
-              <p>
-                <span class="name">小明</span>
-                <span class="gender">男士</span>
-                <span class="phone">12345678901</span>
-              </p>
-              <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
+          <!-- 收货地址 -->
+          <div :class="`${prefixCls}-address-shAddr`">
+            <p class="title">收货地址</p>
+            <div class="list box">
+              <div class="list-item">
+                <p>
+                  <span class="name">小明</span>
+                  <span class="gender">男士</span>
+                  <span class="phone">12345678901</span>
+                </p>
+                <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
+              </div>
+              <div class="list-item">
+                <p>
+                  <span class="name">小明</span>
+                  <span class="gender">男士</span>
+                  <span class="phone">12345678901</span>
+                </p>
+                <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
+              </div>
+              <div class="list-item">
+                <p>
+                  <span class="name">小明</span>
+                  <span class="gender">男士</span>
+                  <span class="phone">12345678901</span>
+                </p>
+                <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
+              </div>
+              <div class="list-item">
+                <p>
+                  <span class="name">小明</span>
+                  <span class="gender">男士</span>
+                  <span class="phone">12345678901</span>
+                </p>
+                <p class="addr">xxx市xxx区xxxxxx路xxx号</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </transition>
+
     <!-- 城市选择 -->
-    <div :class="`${prefixCls}-city`"></div>
+    <div v-if="showcity" :class="`${prefixCls}-city`">
+      <!-- header -->
+      <div :class="`${prefixCls}-city-header`">
+        <van-nav-bar
+          title="城市选择"
+          left-arrow
+          @click-left="backToAddress"
+        />
+        <div class="search">
+          <van-search
+            placeholder="输入城市名或者拼音"
+            v-model="cityName"
+            shape="round"
+          />
+        </div>
+      </div>
+      <!-- 当前城市 -->
+      <div :class="`${prefixCls}-city-select`">
+        <div :class="`${prefixCls}-city-select__current`">
+          <div class="title">当前定位城市</div>
+          <div class="content box">啊啊啊啊啊啊啊啊</div>
+        </div>
+        <div :class="`${prefixCls}-city-select__index`">
+          <van-index-bar>
+          <van-index-anchor index="A" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-index-anchor index="B" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+          <van-cell title="文本" />
+        </van-index-bar>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -262,8 +309,11 @@ export default {
       ],
       goTop: '',
       flag: false,
+      address: '',
       showAddr: false,
-      shaddr: false
+      shaddr: false,
+      showcity: false,
+      cityName: '',
     }
   },
   computed: {},
@@ -298,12 +348,18 @@ export default {
     showAddress() {
       this.showAddr = true;
     },
-    onClickLeft() {
+    backToHome() {
       this.showAddr = false;
     },
-    onClickRight() {
+    addAddress() {
       console.log('新增地址');
     },
+    showCity() {
+      this.showcity = true;
+    },
+    backToAddress() {
+      this.showcity = false;
+    }
   },
   created() {
     // console.log(this.$route);

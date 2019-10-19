@@ -1,11 +1,16 @@
+// 默认背景浅灰色
 body {
   background: $background-color;
 }
+
+// 底部导航条置于顶层
 .nav {
   .van-tabbar {
     z-index: 100 !important;
   }
 }
+
+// 登录页面
 .login {
   background-color: #fff;
   height: 100vh;
@@ -37,6 +42,7 @@ body {
   }
 }
 
+// “我的”
 .user {
   &-header {
     padding: $space-lg;
@@ -113,20 +119,18 @@ body {
     padding-top: 20px;
   }
 }
-
-
 .money, section {cursor: pointer;}
 
+// 一屏高，不可滚动
+.unscrollable {
+  height: 100vh;
+  overflow: hidden;
+}
 // 首页
 .home-index {
-  // 一屏高
-  .unscrollable {
-    height: 100vh;
-    overflow: hidden;
-  }
   // 首页
   &-header {
-    background-image: linear-gradient(90deg, #0af, $color-primary);
+    background-image: $background-image;
     &__title {
       display: -webkit-flex;
       display: flex;
@@ -141,7 +145,7 @@ body {
     }
     &__search {
       padding: $space-primary;
-      background-image: linear-gradient(90deg, #0af, $color-primary);
+      background-image: $background-image;
       div{
         border-radius: 2px;
         display: flex;
@@ -263,6 +267,9 @@ body {
       .span-right {
         position: absolute;
         right: 5px;
+        a {
+          color: #644f1b;
+        }
       }
     }
   }
@@ -438,24 +445,9 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: $background-color;
-    .van-nav-bar {
-      background-image: linear-gradient(90deg, #0af, $color-primary);
+    .van-nav-bar__text {
       color: #fff;
-      .van-nav-bar__left {
-        left: $space-sm;
-        .van-icon {
-          color: #fff;
-          font-size: 25px;
-        }
-      }
-      .van-nav-bar__title {
-        font-size: $font-lg;
-        color: #fff;
-      }
-      .van-nav-bar__text {
-        color: #fff;
-        font-size: $font-ml;
-      }
+      font-size: $font-ml;
     }
     &-search {
       .city {
@@ -472,9 +464,6 @@ body {
           margin-left: 12px;
         }
       }
-      .van-search--show-action {
-        padding-right: $space-md;
-      }
       .van-search {
         width: 80%;
         .van-search__content--round {
@@ -485,9 +474,6 @@ body {
           .van-cell {
             font-size: $font-size-auto * 0.9;
           }
-        }
-        .van-search__action {
-          display: none;
         }
       }
     }
@@ -535,15 +521,103 @@ body {
       }
     }
   }
+  .van-nav-bar {
+    background-image: $background-image;
+    color: #fff;
+    .van-nav-bar__left {
+      left: $space-sm;
+      .van-icon {
+        color: #fff;
+        font-size: 25px;
+      }
+    }
+    .van-nav-bar__title {
+      font-size: $font-lg;
+      color: #fff;
+    }
+  }
+  // 选择城市
+  &-city {
+    z-index: 20;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    &-header {
+      .van-hairline--bottom::after {
+        display: none;
+      }
+      .van-search {
+        padding: $space-sm $space-lg + 5;
+        background-image: $background-image !important;
+        .van-search__content {
+          background-color: #fff;
+          .van-field__control {
+            font-size: $font-size-auto * 0.9;
+          }
+        }
+        .van-cell {
+          padding: 3px $space-sm 3px 0
+        }
+      }
+    }
+    &-select {
+      &__current {
+        .title {
+          background-color: $background-color;
+          padding: $space-primary $space-md;
+          border-bottom: $border;
+          color: $color-info;
+        }
+        .content {
+          padding: $space-md;
+        }
+      }
+      &__index {
+        .van-index-anchor {
+          background-color: $background-color;
+          border-bottom: $border;
+          color: $color-info;
+          padding: $space-xs - 2 $space-md;
+          font-weight: 600;
+        }
+        .van-cell {
+          border-bottom: $border;
+          padding: $space-primary + 3 $space-md;
+        }
+        .van-index-bar__sidebar {
+          top: 100vw;
+          margin-right: $space-primary + 2;
+          color: $color-text-gray;
+          .van-index-bar__index {
+            font-size: $font-md;
+            margin-bottom: $space-xs;
+            font-weight: 600;
+          }
+          [data-index*="I"], [data-index*="O"][data-index*="U"], [data-index*="V"] {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }
 .van-grid-item__content::after {border: none;}
+// 从页面左侧移入的动画
 .slide-fade-enter, .slide-fade-leave-to {
   transform: translate(100vw, 0);
 }
 .slide-fade-enter-active, .slide-fade-leave-active {
   transition: all .3s linear;
 }
-
+// 不显示元素
+.display-none {
+  display: none;
+}
+// 发现
 .find {
   &-parts {
     border-top: $border;
@@ -669,6 +743,75 @@ body {
         vertical-align: middle;
         font-size: $font-sm;
       }
+    }
+  }
+}
+// 搜索
+.search-index {
+  background-color: #fff;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  overflow: hidden;
+  &-header {
+    &__back {
+      i {
+        font-size: $font-lg + 7;
+        padding: $space-xs;
+        color: $color-info;
+      }
+    }
+    &__search {
+      .van-search__content {
+        background-color: $background-color;
+        .van-cell {
+          font-size: $font-size-auto * 0.9;
+          padding: 3px 8px 3px 0;
+        }
+      }
+      .van-search__action {
+        font-weight: bold;
+        font-size: $font-ml;
+        padding: 0 $space-primary;
+      }
+    }
+  }
+  &-history {
+    &__title {
+      padding: $space-primary;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span {
+        color: $color-secondary;
+        font-size: $font-ml;
+        font-weight: bold;
+      }
+      i {
+        color: $color-text-gray;
+        font-weight: bold;
+      }
+    }
+    &__content {
+      padding: 0 3.5vw 3.5vw;
+    }
+  }
+  .v-button--info {
+    padding: $space-sm $space-primary;
+    margin: $space-primary $space-md 0 0;
+    border-radius: 3px;
+  }
+  &-hot {
+    &__title {
+      font-size: $font-ml;
+      font-weight: bold;
+      color: $color-secondary;
+      padding: $space-primary;
+    }
+    &__content {
+      padding: 0 3.5vw 3.5vw;
     }
   }
 }

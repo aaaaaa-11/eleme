@@ -17,6 +17,10 @@
     background-color: $color-success;
     color: #fff;
   }
+  &--info {
+    background-color: $background-color;
+    color: $color-info;
+  }
   &--block {
     // display: block;
     width: 100%;

@@ -6,6 +6,8 @@ import Home from './views/home/index.vue';
 import Find from './views/find/index.vue';
 import Order from './views/order/index.vue';
 import User from './views/user/index.vue';
+import Search from './views/search/index.vue';
+import SuperVip from './views/supervip.vue'
 
 Vue.use(Router);
 
@@ -39,12 +41,22 @@ export default new Router({
           name: 'user',
           component: User,
         },
+        {
+          path: '/search',
+          name: 'search',
+          component: Search,
+        },
       ],
     },
     {
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/supervip',
+      name: 'supervip',
+      component: SuperVip,
     },
   ],
 });
