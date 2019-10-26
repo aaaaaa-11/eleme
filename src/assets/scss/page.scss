@@ -253,7 +253,7 @@ body {
       display: flex;
       align-items: center;
       background-image: -webkit-linear-gradient(left top, #ffefc4, $background-yellow);
-      color: #644f1b;
+      color: $color-dark-yellow;
       p {
         padding-left: 5px;
       }
@@ -268,7 +268,7 @@ body {
         position: absolute;
         right: 5px;
         a {
-          color: #644f1b;
+          color: $color-dark-yellow;
         }
       }
     }
@@ -814,6 +814,309 @@ body {
       padding: 0 3.5vw 3.5vw;
     }
   }
+}
+// 会员
+.supervip-index {
+  position: relative;
+  &-header {
+    position: relative;
+    padding-bottom: $space-lg;
+    color: $background-yellow;
+    img {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      z-index: -1;
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .sub-title {
+        padding-top: $space-primary;
+        font-size: $font-ml;
+      }
+      .title {
+        font-size: $font-sm * 3;
+        span {
+          font-size: $font-size * 2;
+          color: $color-error;
+        }
+      }
+      .small {
+        color: $color-dark-yellow;
+        border-radius: 4vw;
+        padding: 3px $space-sm;
+        font-size: $font-size-auto * 0.9;
+        margin: $space-xs 0 $space-primary;
+        box-shadow: inset 0 0 $space-xs #000;
+      }
+    }
+  }
+  .v-button--svip {
+    font-size: $font-ml;
+    padding: $space-xs + 1 $space-primary * 5;
+    border-radius: 6vw;
+    .font-small {
+      font-size: $font-size;
+    }
+    .font-large {
+      font-size: $font-lg + 4;
+      vertical-align: sub;
+    }
+    .opacity {
+      opacity: .5;
+      text-decoration-line: line-through;
+    }
+  }
+  &-privilege {
+    padding: $space-xs $space-md 15vh;
+    margin-top: $space-xs;
+    &-frame {
+      padding: $space-md $space-primary + 2 $space-primary + 2;
+      border-radius: $space-sm;
+      box-shadow: 0 $space-xs $space-xs $color-border-base;
+      margin-bottom: $space-primary;
+      &__title {
+        font-size: $font-ml;
+        .flag {
+          font-size: $font-md;
+          background-color: $color-warning;
+          color: $color-text-brown;
+          padding: $space-xs - 2;
+          border-radius: 4px;
+        }
+        .subtitle {
+          font-size: $font-sm;
+          color: $color-info;
+          margin-top: $space-xs;
+        }
+      }
+      .privi1 {
+        display: flex;
+        justify-content: space-evenly;
+        padding-top: 20px;
+        .item {
+          width: 100%;
+          margin-right: 10px;
+          border-radius: 4px;
+          text-align: center;
+          p.money {
+            background-color: $color-light-yellow;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding: $space-primary 0 $space-xs;
+            color: $color-error;
+            font-size: $font-ml;
+            span {
+              font-size: $font-sm * 3;
+            }
+          }
+          p.info {
+            background-color: $color-light-yellow;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            font-size: $font-size-auto * 0.9;
+            padding: $space-xs 0 $space-sm;
+            color: $color-text-brown;
+          }
+        }
+      }
+      .privi2 {
+        margin-top: $space-primary + 2;
+        .van-swipe {
+          padding-bottom: 3.3vh;
+          .van-swipe-item {
+            .van-grid-item {
+              background-color: #fff;
+              .van-grid-item__content {
+                background-color: $color-white-yellow;
+                margin: $space-sm $space-sm 0 0;
+                font-size: $font-sm;
+                height: auto;
+                border-radius: 4px;
+                div.img {
+                  width: 16vw;
+                  height: 16vw;
+                  border-radius: 4px;
+                  overflow: hidden;
+                  img {
+                    width: 100%;
+                  }
+                }
+                div.info {
+                  color: $color-text-brown;
+                  .price {
+                    color: $color-error;
+                    .font-large {
+                      font-size: $font-lg;
+                    }
+                  }
+                }
+              }
+              &:nth-child(3n) {
+                .van-grid-item__content {
+                  margin-right: 0;
+                }
+              }
+            }
+          }
+        }
+      }
+      // 轮播指示器
+      .van-swipe__indicators {
+        bottom: $space-primary;
+        .van-swipe__indicator {
+          width: $space-sm;
+          height: 1px;
+          background-color: $color-secondary;
+        }
+        .van-swipe__indicator--active {
+          background-color: $color-dark-yellow !important;
+        }
+      }
+      p.footer {
+        font-size: $font-sm;
+        color: $color-info;
+      }
+      .privi3 {
+        display: flex;
+        justify-content: space-between;
+        margin-top: $space-md;
+        .item {
+          border: 1px solid $color-text-brown;
+          border-radius: 4px;
+          width: 48%;
+          text-align: center;
+          padding: $space-sm $space-sm $space-primary;
+          box-sizing: border-box;
+          color: $color-text-brown;
+          .gold {
+            font-size: $font-size-auto * 0.9;
+            i {
+              vertical-align: middle;
+              font-size: 14px;
+              margin-right: 3px;
+            }
+            .count {
+              color: $color-error;
+            }
+          }
+          .money {
+            background-color: $color-light-yellow;
+            display: -webkit-inline-flex;
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: $space-primary $space-lg $space-primary $space-primary;
+            margin-top: $space-sm;
+            .num {
+              color: $color-error;
+              .font-lg {
+                font-size: $font-size-auto * 1.7;
+              }
+            }
+            .info {
+              margin-right: $space-md;
+            }
+          }
+        }
+      }
+      .privi4 {
+        .van-swipe {
+          margin-top: $space-md;
+          .van-swipe__track {
+            .van-swipe-item {
+              padding-bottom: 2vh;
+              .van-grid {
+                .van-grid-item {
+                  margin-bottom: 2vh;
+                  .van-grid-item__content {
+                    display: block;
+                    padding: 0;
+                    .img {
+                      position: relative;
+                      height: 17vh;
+                      overflow: hidden;
+                      border-radius: 4px;
+                      img {
+                        width: 100%;
+                      }
+                      .vipdiscount {
+                        position: absolute;
+                        bottom: 0;
+                        background-color: $color-error;
+                        color: #fff;
+                        border-radius: 4px;
+                        font-size: $font-md;
+                      }
+                    }
+                    .title {
+                      font-size: 0.94em;
+                      margin-top: $space-xs;
+                    }
+                    .price {
+                      .bold {
+                        .font-large {
+                          font-size: $font-size-auto * 1.5;
+                        }
+                      }
+                      .old-price {
+                        text-decoration-line: line-through;
+                        color: $color-info;
+                      }
+                    }
+                  }
+                  .van-grid-item__content--center {
+                    align-items: normal;
+                  }
+                  &:nth-child(2n) {
+                    .van-grid-item__content {
+                      padding-left: $space-xs;
+                    }
+                  }
+                  &:nth-child(2n-1) {
+                    .van-grid-item__content {
+                      padding-right: $space-xs;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .privi5 {
+        .img {
+          width: 40%;
+          margin: $space-md auto $space-primary;
+          img {
+            width: 100%;
+          }
+        }
+        .privi5-footer {
+          font-size: $font-md;
+        }
+      }
+    }
+  }
+  &-svip-button {
+    width: 93vw;
+    position: fixed;
+    bottom: 4vh;
+    left: 3.5vw;
+    .v-button--svip {
+      box-sizing: border-box;
+    }
+  }
+}
+.svipBtn-enter, .svipBtn-leave-to {
+  position: absolute;
+  bottom: -4vh;
+}
+.svipBtn-enter-active, .svipBtn-leave-active {
+  position: fixed;
+  transition: all .5s linear;
 }
 .font-sm {
   font-size: $font-sm;

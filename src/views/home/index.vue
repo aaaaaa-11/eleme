@@ -246,6 +246,8 @@
 </template>
 <script>
 const prefixCls = 'home-index';
+
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -316,7 +318,11 @@ export default {
       cityName: '',
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters([
+      'user',
+    ])
+  },
   watch: {},
   methods: {
     onConfirm() {
@@ -363,10 +369,9 @@ export default {
   },
   created() {
     // console.log(this.$route);
-    // console.log(this.$router);
+    console.log(this.$store);
   },
   mounted() {
-    this.container = this.$refs.container;
     this.scrollGoTop();
     window.addEventListener('scroll', this.scrollGoTop);
   }

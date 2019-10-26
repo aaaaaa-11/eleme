@@ -6,7 +6,8 @@
         <img src="../../assets/imgs/user/logo.png" alt="">
       </div>
       <div :class="`${prefixCls}-header__title float--left`">
-        <h3>登录/注册</h3>
+        <h3 v-if="!user">登录/注册</h3>
+        <h3 v-else>{{user.name}}</h3>
         <p>
           <van-icon name="bookmark-o" />
           <span>登陆后享受更多特权</span>
@@ -98,6 +99,7 @@ export default {
   data() {
     return {
       prefixCls,
+      user: null,
     };
   },
   computed: {},
@@ -116,6 +118,7 @@ export default {
     }
   },
   created() {
+    this.user = this.$store.state.user;
   },
 }
 </script>
