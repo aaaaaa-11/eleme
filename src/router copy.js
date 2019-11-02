@@ -10,7 +10,6 @@ import Order from './views/order/index.vue';
 import User from './views/user/index.vue';
 import Search from './views/search/index.vue';
 import SuperVip from './views/supervip.vue';
-import moment from 'moment';
 
 Vue.use(Router);
 
@@ -64,30 +63,28 @@ const router =  new Router({
   ],
 });
 
-router.beforeEach(function(to, from, next) {
-  // 路由跳转前，先拿到本地的用户信息
-  let user = JSON.parse(localStorage.getItem('user'));
-  // 判断用户信息是否存在
+router.beforeEach(function(to,form,next){
+  let user = localStorage.getItem('user');
   if (user) {
-    // 存在则判断是否超时
-    // 先拿到用户登录时间
-    let loginDate = moment(user.date);
-    // 如果超时
-    if(moment() - loginDate > 60000000) {
-      store.dispatch('saveUser', null); // 清空store中用户信息:store.state.user = null;
-      localStorage.removeItem('user'); // 清除本地用户信息
-    } else { // 未超时
-      store.dispatch('saveUser', user); // 每次刷新都将本地拿到的user信息放到store中
-      // 如果刷新登录页面
-      if (to.name === '/login') {
-        // 则跳转到用户界面
+    // 拿到的是字符串格式，需要转格式
+    user = JSON.parse(user);
+    // 判断是否超过10min
+    const userDate = moment(user.date);
+    if (moment() - userDate > 600000) { // 10min
+      // 超时，state.user = null;
+      store.dispatch('saveUser', null);
+      localStorage.removeItem('user')
+    } else {
+      store.dispatch('saveUser', user);
+      // 如果没超过10min，此时如果刷新了登录页，应该跳到user页
+      if (to.name === 'login') {
         next({
           path: '/user'
-        })
+        });
       }
     }
   }
-  next();
-});
+  next(); // 继续下个路由
+})
 
 export default router;

@@ -7,10 +7,11 @@
       </div>
       <div :class="`${prefixCls}-header__title float--left`">
         <h3 v-if="!user">登录/注册</h3>
-        <h3 v-else>{{user.name}}</h3>
+        <h3 class="text-overflow" v-else>{{user.name}}</h3>
         <p>
           <van-icon name="bookmark-o" />
-          <span>登陆后享受更多特权</span>
+          <span v-if="!user">登陆后享受更多特权</span>
+          <span v-else>{{user.mobile}}</span>
         </p>
       </div>
       <div :class="`${prefixCls}-header__arrow`">
@@ -106,6 +107,10 @@ export default {
   watch: {},
   methods: {
     go2Login() {
+      // 如果state里有user信息，不做处理
+      if (this.user) {
+        return;
+      }
       this.$router.push({
         name: 'login',
         params: {
@@ -118,7 +123,7 @@ export default {
     }
   },
   created() {
-    this.user = this.$store.state.user;
+    this.user = this.$store.state.user.user;
   },
 }
 </script>

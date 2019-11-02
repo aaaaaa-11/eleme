@@ -6,8 +6,11 @@ import './registerServiceWorker';
 import './plugins/vant';
 import '@/assets/scss/index.scss';
 import './plugins/axios';
+import './apis/login'
+import moment from 'moment';
 
 Vue.config.productionTip = false;
+window.moment = moment;
 
 new Vue({
   router,

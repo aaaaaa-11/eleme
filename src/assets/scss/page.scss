@@ -28,6 +28,12 @@ body {
     .float--left {
       width: 60%;
     }
+    .disabledToClick {
+      color: $color-light;
+    }
+    .regain {
+      color: $color-primary;
+    }
   }
   &-button {
     margin: $space-md auto;
@@ -128,6 +134,7 @@ body {
 }
 // 首页
 .home-index {
+  margin-bottom: 50px;
   // 首页
   &-header {
     background-image: $background-image;
@@ -143,6 +150,10 @@ body {
         font-size: bold;
       }
     }
+    // van-sticky的z-index太高了
+    .van-sticky--fixed {
+      z-index: 10;
+    }
     &__search {
       padding: $space-primary;
       background-image: $background-image;
@@ -154,10 +165,33 @@ body {
         background-color: #fff;
         color: $color-text-gray;
         span {
-          padding: $space-primary 5px;
+          padding: $space-sm 5px;
           font-size: $font-rem;
         }
       }
+    }
+  }
+  // 未选择地址&未登录时显示
+  .noaddress {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 14vh;
+    img {
+      width: 55%;
+    }
+    p {
+      font-size: $font-size-auto * 1.23;
+      color: $color-info;
+      margin-bottom: $space-primary;
+    }
+    .v-button {
+      height: 40px;
+      border-radius: 2px;
     }
   }
   &-swipe {
@@ -275,7 +309,6 @@ body {
   }
   &-shop {
     background-color: #fff;
-    margin-bottom: 50px;
     &-recommend {
       p {
         padding: $space-md 0;
@@ -295,7 +328,7 @@ body {
       }
     }
     &-list {
-      section {
+      section.item {
         .img {
           width: 23%;
           padding-left: $space-primary;
@@ -306,7 +339,7 @@ body {
             border: $border;
           }
         }
-        padding: $space-lg 0;
+        padding: $space-md 0;
         border-bottom: $border;
         &::after {
           content: '';
@@ -321,19 +354,20 @@ body {
         padding: 0 $space-primary;
         box-sizing: border-box;
         color: $color-info;
+        font-size: $font-size-auto * 0.8;
         p {
-          font-size: $font-sm;
-          margin-bottom: $space-primary;
+          margin-bottom: $space-sm;
         }
         .shop-title { // 商家名称
           display: flex;
           justify-content: space-between;
           align-items: center;
           p:first-child { // 商家标题
-            font-size: $font-size;
+            font-size: $font-size-auto * 1.2;
             font-weight: bold;
             max-width: 80%;
             color: $color-text-primary;
+            margin-bottom: $space-xs;
           }
           // 弹出层-不喜欢
           .van-cell {
@@ -354,26 +388,80 @@ body {
             text-align: center;
           }
         }
-        .van-rate { // 评分
-          margin-bottom: $space-primary;
+        .rate { // 评分一栏
+          .van-rate { // 评分
+            margin-bottom: $space-primary;
+          }
+          .score, .order {
+            margin-left: $space-xs;
+          }
+          .isFNSpecialDelivery { // 蜂鸟专送
+            background-color: $color-primary;
+            padding: 0 1px;
+            color: #fff;
+          }
         }
-        .add {
-          margin: 0 3px;
-          border: 1px solid #ccc;
-          padding: 1px 2px;
-          border-radius: 1px;
+        .send { // 配送一栏
+          .sendBasePrice {
+            &::after {
+              content: '|';
+              display: inline-block;
+              margin: 0 3px;
+            }
+          }
+        }
+        .description { // 关键字一栏
+          span {
+            margin: 0 3px;
+            border: 1px solid #ccc;
+            padding: 0 2px;
+            border-radius: 1px;
+          }
+          .isPerfect {
+            color: $color-error;
+          }
         }
         .activites { // 活动
           border-top: $border-dashed;
           margin-top: $space-primary;
+          .hiddenMoreActivities {
+            max-height: 77px;
+            overflow: hidden;
+          }
+          .triangle {
+            border-top-color: $color-info;
+            transform: rotate(0);
+            display: inline-block;
+            transition: all .3s ease-in-out;
+            top: 2px;
+          }
+          .toUp {
+            transform: rotate(180deg);
+            transition: all .3s ease-in-out;
+            top: -2px;
+          }
           p {
             margin: 5px 0;
             span {
-              background-color: $color-error;
               color: #fff;
               padding: 2px;
               margin-right: 3px;
               border-radius: 2px;
+            }
+            .subtract, .discount {
+              background-color: $color-error;
+            }
+            .first {
+              background-color: $color-green;
+            }
+            .special, .exchange {
+              background-color: $color-orange;
+            }
+            .new {
+              background-color: $color-success;
+            }
+            .compensate, .safe, .invoice {
+              background-color: $color-secondary;
             }
           }
         }
@@ -381,7 +469,7 @@ body {
     }
     &-nav {
       position: sticky;
-      top: 57px;
+      top: 53px;
       z-index: 10;
       padding: $space-lg 0;
       background-color: #fff;
@@ -421,6 +509,29 @@ body {
       }
     }
   }
+  // 未登录，不显示商家
+  &-noshoplist {
+    padding-bottom: $space-primary;
+    text-align: center;
+    img {
+      width: 55%;
+    }
+    .noresult {
+      font-size: $font-ml;
+      color: $color-secondary;
+      margin-bottom: $space-primary;
+    }
+    .info {
+      color: $color-info;
+      font-size: $font-md;
+      margin-bottom: $space-primary;
+    }
+    .v-button {
+      padding: 0 50px;
+      height: 40px;
+      border-radius: 2px;
+    }
+  }
   &-toTop {
     position: fixed;
     bottom: 100px;
@@ -457,7 +568,7 @@ body {
         justify-content: space-around;
         font-size: 13px;
         padding-left: $space-lg;
-        .trangle {
+        .triangle {
           border: 3px solid transparent;
           border-top-color: $color-text-primary;
           top: 2px;

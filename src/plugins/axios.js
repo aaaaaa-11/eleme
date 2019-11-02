@@ -76,4 +76,4 @@ Plugin.install = (VUE, options) => {
 
 Vue.use(Plugin)
 
-export default Plugin;
+export default _axios;

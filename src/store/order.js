@@ -6,7 +6,7 @@ import getters from './getters';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+export default {
   state: {
     orders: [],
   },
@@ -16,4 +16,4 @@ export default new Vuex.Store({
   },
   getters: {
   },
-});
+};
