@@ -121,11 +121,85 @@ body {
     }
   }
   .profile {
+    // background-image: url('../../assets/imgs/user/logo.png');
     color: $color-primary;
     padding-top: 20px;
   }
 }
 .money, section {cursor: pointer;}
+
+// userInfo登陆后用户信息
+.userInfo-index {
+  font-size: $font-ml;
+  &-header {
+    padding: 0 $space-md;
+    // background-image: url(../imgs/find/1.webp);
+    &-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .headImg {
+          width: 9vh;
+          height: 9vh;
+          border-radius: 50%;
+          overflow: hidden;
+          margin: $space-sm 0;
+          img {
+            width: 100%;
+          }
+        }
+        i {
+          color: $color-info;
+        }
+      }
+    }
+    &-uname {
+      padding: $space-md 0;
+      .content {
+        color: $color-info;
+      }
+    }
+  }
+  .title {
+    font-size: $font-md;
+    color: $color-info;
+    padding: $space-primary $space-md;
+  }
+  &-account {
+    .box {
+      padding: $space-md;
+      i {
+        color: $color-primary;
+        vertical-align: middle;
+        margin-right: $space-xs;
+      }
+      .phoneNumber, .phoneNumber i {
+        color: $color-info;        
+      }
+    }
+  }
+  &-safe {
+    .box {
+      padding: $space-md;
+      a {
+        color: $color-primary;
+        i {
+          vertical-align: middle;
+        }
+      }
+    }
+  }
+  &-loginBtn {
+    color: $color-error;
+    border: none;
+    margin-top: $space-lg;
+    padding: $space-md 0;
+  }
+}
 
 // 一屏高，不可滚动
 .unscrollable {

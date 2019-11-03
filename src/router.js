@@ -10,6 +10,7 @@ import Order from './views/order/index.vue';
 import User from './views/user/index.vue';
 import Search from './views/search/index.vue';
 import SuperVip from './views/supervip.vue';
+import UserInfo from './views/userInfo/index.vue';
 import moment from 'moment';
 
 Vue.use(Router);
@@ -60,6 +61,11 @@ const router =  new Router({
       path: '/supervip',
       name: 'supervip',
       component: SuperVip,
+    },
+    {
+      path: '/userinfo',
+      name: 'userInfo',
+      component: UserInfo,
     },
   ],
 });

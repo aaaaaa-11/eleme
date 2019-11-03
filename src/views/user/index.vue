@@ -109,17 +109,20 @@ export default {
     go2Login() {
       // 如果state里有user信息，不做处理
       if (this.user) {
-        return;
+        this.$router.push({
+          name: 'userInfo',
+        });
+      } else {
+        this.$router.push({
+          name: 'login',
+          params: {
+            data: 1
+          },
+          query: {
+            data: 1,
+          }
+        });
       }
-      this.$router.push({
-        name: 'login',
-        params: {
-          data: 1
-        },
-        query: {
-          data: 1,
-        }
-      });
     }
   },
   created() {
