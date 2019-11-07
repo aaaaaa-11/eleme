@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import moment from 'moment';
 import store from './store/index';
+import common from '@/utils/common';
 
 import Login from './views/login.vue';
 import Nav from './views/nav.vue';
@@ -11,7 +13,10 @@ import User from './views/user/index.vue';
 import Search from './views/search/index.vue';
 import SuperVip from './views/supervip.vue';
 import UserInfo from './views/userInfo/index.vue';
-import moment from 'moment';
+
+// import SelectAddress from './components/SelectAddress.vue';
+// import SelectCity from './components/SelectCity.vue';
+
 
 Vue.use(Router);
 
@@ -29,6 +34,20 @@ const router =  new Router({
           path: '/home',
           name: 'home',
           component: Home,
+          // children: [
+          //   {
+          //     path: '/home/address',
+          //     name: 'selectAddress',
+          //     component: SelectAddress,
+          //     children: [
+          //       {
+          //         path: '/home/address/city',
+          //         name: 'selectCity',
+          //         component: SelectCity,
+          //       }
+          //     ]
+          //   }
+          // ]
         },
         {
           path: '/order',
@@ -72,14 +91,17 @@ const router =  new Router({
 
 router.beforeEach(function(to, from, next) {
   // 路由跳转前，先拿到本地的用户信息
-  let user = JSON.parse(localStorage.getItem('user'));
+  // let user = JSON.parse(localStorage.getItem('user'));
+  let user = localStorage.getItem('user');
   // 判断用户信息是否存在
   if (user) {
+    user = JSON.parse(user);
     // 存在则判断是否超时
     // 先拿到用户登录时间
     let loginDate = moment(user.date);
     // 如果超时
-    if(moment() - loginDate > 60000000) {
+    console.log('系统登录时长', common.systemTime);
+    if(moment() - loginDate > common.systemTime) {
       store.dispatch('saveUser', null); // 清空store中用户信息:store.state.user = null;
       localStorage.removeItem('user'); // 清除本地用户信息
     } else { // 未超时

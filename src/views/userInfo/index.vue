@@ -36,7 +36,7 @@
         </a>
       </div>
     </div>
-    <button :class="`${prefixCls}-loginBtn v-button--block bold box`">退出登录</button>
+    <button :class="`${prefixCls}-loginBtn v-button--block bold box`" @click="logout">退出登录</button>
   </div>
 </template>
 <script>
@@ -56,6 +56,23 @@ export default {
   },
   watch: {},
   methods: {
+    logout() {
+      if (!confirm('确认退出登录吗？')) {
+        return;
+      }
+      this.$store.dispatch('saveUser', '').then(
+        () => {
+          localStorage.removeItem('user');
+          console.log('success to logout.');
+          this.$router.push({
+            path: '/login',
+          })
+        },
+        err => {
+          console.log(err);
+        }
+      )
+    }
   },
   created() {
     console.log(this.user.mobile);
