@@ -9,6 +9,8 @@ Vue.use(Vuex);
 export default {
   state: {
     user: null,
+    address: null,
+    city: null,
   },
   mutations: {
     [types.USER_INFO](state, data) {

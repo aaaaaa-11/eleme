@@ -437,8 +437,13 @@ body {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          .isBrand {
+            background-color: $color-warning;
+            font-size: $font-md;
+            padding: 2px;
+          }
           p:first-child { // 商家标题
-            font-size: $font-size-auto * 1.2;
+            font-size: $font-ml - 1;
             font-weight: bold;
             max-width: 80%;
             color: $color-text-primary;
@@ -486,6 +491,9 @@ body {
           }
         }
         .description { // 关键字一栏
+          .keyword {
+            display: inline;
+          }
           span {
             margin: 0 3px;
             border: 1px solid #ccc;
@@ -494,49 +502,46 @@ body {
           }
           .isPerfect {
             color: $color-error;
+            border: none;
+            img {
+              width: 2.8vw;
+            }
           }
         }
         .activites { // 活动
           border-top: $border-dashed;
           margin-top: $space-primary;
-          .hiddenMoreActivities {
-            max-height: 77px;
-            overflow: hidden;
-          }
-          .triangle {
-            border-top-color: $color-info;
-            transform: rotate(0);
-            display: inline-block;
-            transition: all .3s ease-in-out;
-            top: 2px;
-          }
-          .toUp {
-            transform: rotate(180deg);
-            transition: all .3s ease-in-out;
-            top: -2px;
-          }
-          p {
-            margin: 5px 0;
-            span {
-              color: #fff;
-              padding: 2px;
-              margin-right: 3px;
-              border-radius: 2px;
+          // .hiddenMoreActivities {
+          //   max-height: 77px;
+          //   overflow: hidden;
+          // }
+          section {
+            .float--right {
+              .atvNum {}
+              .triangle {
+                border-top-color: $color-info;
+                transform: rotate(0);
+                display: inline-block;
+                transition: all .3s ease-in-out;
+                top: 2px;
+              }
+              .toUp {
+                transform: rotate(180deg);
+                transition: all .3s ease-in-out;
+                top: -2px;
+              }
             }
-            .subtract, .discount {
-              background-color: $color-error;
-            }
-            .first {
-              background-color: $color-green;
-            }
-            .special, .exchange {
-              background-color: $color-orange;
-            }
-            .new {
-              background-color: $color-success;
-            }
-            .compensate, .safe, .invoice {
-              background-color: $color-secondary;
+            .activities__content {
+              p {
+                margin: 5px 0;
+                span {
+                  background-color: $color-secondary;
+                  color: #fff;
+                  padding: 2px;
+                  margin-right: 3px;
+                  border-radius: 2px;
+                }
+              }
             }
           }
         }
@@ -548,7 +553,7 @@ body {
       z-index: 10;
       padding: $space-lg 0;
       background-color: #fff;
-      ul {
+      .van-tabbar {
         position: absolute;
         top: 0;
         left: 0;
@@ -556,31 +561,95 @@ body {
         box-sizing: border-box;
         display: flex;
         justify-content: space-around;
-        line-height: 40px;
+        height: 40px;
         font-size: 16px;
-        li {
+        .van-tabbar-item--active {
+          font-weight: bold;
+          .van-dropdown-item__option {
+            font-weight: normal;
+          }
+        }
+        // .van-tabbar-item__text {
+        //   font-weight: normal;
+        // }
+        .van-tabbar-item {
+          .van-tabbar-item__icon {
+            display: none;
+          }
          display: flex;
          align-items: center;
          justify-content: center;
+         font-size: $font-size;
          .van-dropdown-menu {
-           height: auto;
            .van-dropdown-menu__title {
-             font-weight: bold;
+             font-size: $font-size;
+           }
+           height: auto;
+          .van-dropdown-item {
+            margin-top: $space-sm;
+            border-top: $border;
+            .van-cell:not(:last-child)::after {
+              border-bottom: none;
             }
-            .van-dropdown-item__option--active, .van-dropdown-item__option--active .van-dropdown-item__icon {
+          }
+          .van-dropdown-menu__title--active, .van-dropdown-item__option--active, .van-dropdown-item__option--active .van-dropdown-item__icon {
+              font-weight: bold;
               color: $color-primary;
             }
          }
-         a {
-           color: $color-info;
-           .van-icon-filter-o {
-             top: 2px;
-           }
-         }
-       }
-      }
-      &--active {
-        font-weight: bold;
+        }
+        .selectStore {
+          width: 25%;
+          .selectStore-dropDown-menu {
+            height: 40px;
+            i {
+              line-height: 40px;
+              right: $space-lg;
+            }
+          }
+          .van-dropdown-item__content {
+            .selectStore-extend {
+              .selectStore-extend__content {
+                padding: $space-sm $space-primary;
+                .title {
+                  padding-right: $space-xs;
+                  font-size: $font-md;
+                  line-height: 16px;
+                  color: $color-info;
+                  text-align: left;
+                }
+                .content {
+                  font-size: $font-size-auto * 0.8;
+                  margin: $space-sm 0;
+                  &:last-child {
+                    margin-bottom: 0;
+                  }
+                  .van-row {
+                    .van-col {
+                      div {
+                        margin: 3px;
+                        background-color: $background-color;
+                        line-height: 36px;
+                        img {
+                          width: 3.5vw;
+                          margin-right: $space-xs;
+                        }
+                      }
+                    }
+                  } 
+                }
+              }
+              .btnBox {
+                border-top: $border;
+                button {
+                  width: 50%;
+                  display: inline-block;
+                  border: none;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -607,7 +676,13 @@ body {
       border-radius: 2px;
     }
   }
-  &-toTop {
+  &-noMoreStore {
+    padding: $space-primary $space-lg;
+    font-size: $font-size-auto * 0.9;
+    color: $color-secondary;
+    border-bottom: $border;
+  }
+  &-goTop {
     position: fixed;
     bottom: 100px;
     right: $space-lg;
@@ -618,10 +693,17 @@ body {
     padding: $space-primary;
     box-sizing: border-box;
     border: $border;
+    opacity: 1;
     img {
       width: 100%;
     }
   }
+}
+.goTop-fade-enter, .goTop-fade-leave-to {
+  opacity: 0;
+}
+.goTop-fade-enter-active, .goTop-fade-leave-active {
+  transition: all 1.5s ease;
 }
 // 选择地址
 .selectAddress-index {

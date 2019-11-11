@@ -90,9 +90,24 @@ const router =  new Router({
 });
 
 router.beforeEach(function(to, from, next) {
-  // 路由跳转前，先拿到本地的用户信息
+  // 路由跳转前，先拿到本地的用户信息&地址信息
   // let user = JSON.parse(localStorage.getItem('user'));
-  let user = localStorage.getItem('user');
+  let user = localStorage.getItem('user'),
+      address = localStorage.getItem('address'),
+      city = localStorage.getItem('city');
+  // 判断地址信息是否存在
+  if (city) {
+    city = JSON.parse(city);
+    store.dispatch('saveCity', city);
+    if (address) { // 城市存在，才能判断address
+      address = JSON.parse(address);
+      store.dispatch('saveAddress', address);
+      console.log('change router, city&addr=', city, address);
+    }
+  } else {
+    store.dispatch('saveCity', null);
+    store.dispatch('saveAddress', null);
+  }
   // 判断用户信息是否存在
   if (user) {
     user = JSON.parse(user);

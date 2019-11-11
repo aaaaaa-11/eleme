@@ -8,8 +8,8 @@ function sendCode(params) {
   return axios.post('/sendCode', params);
 }
 
-function getStores() {
-  return axios.get('/store/save');
+function getStores(params) {
+  return axios.get('/store/getStore', params);
 }
 
 export {

@@ -1,7 +1,7 @@
 <template>
   <div :class="prefixCls">
     <!-- 城市选择 -->
-    <div v-if="showCityFlag" :class="`${prefixCls}-city`">
+    <div :class="`${prefixCls}-city`">
       <div :class="`${prefixCls}-city-header`">
         <van-nav-bar
           title="城市选择"
@@ -57,64 +57,44 @@ export default {
   data() {
     return {
       prefixCls,
-      showCityFlag: true,
-      inputcity: '', // 输入城市名
-      cityflag: false,
+      inputcity: '', // 城市名输入值
+      cityflag: false, // 标识符，是否存在城市名
       city: '',
     };
   },
-  computed: {
-    // ...mapGetters([
-    //   'city',
-    // ]),
-  },
+  computed: {},
   watch: {},
   methods: {
     backToAddress() { // “选择城市” -> “选择收货地址”
-      this.showCityFlag = false; // 不显示“选择城市”组件
       this.$emit('getCityFromShowCity', this.city, this.cityflag); // 将city数据传递给父组件“选择收货地址”
       this.inputcity = ''; // 清空输入框
     },
-    inputCity() { // 输入当前城市
+    inputCity() { // 输入当前城市，并按回车
       if (this.inputcity) { // 如果输入不为空
-        // console.log('city component, inputcity type', typeof this.inputcity);
         this.city = this.inputcity;
         this.cityflag = true;
-        // console.log('city type ', typeof this.city, 'city=', this.city);
-        // this.$store.dispatch('saveCity', this.city).then(
-        //   () => {
-        //     console.log('ok in city comp to store city data');
-        //     localStorage.setItem('city', JSON.stringify(this.city));
-        //     console.log('ok ----- 本地city:', loaclStorage.getItem(this.city));
-        //     console.log('city component, city=', this.city);
-        //   },
-        //   err => {
-        //     console.log('城市存入失败---', err || 'city component, fail to store city data');
-        //   }
-        // )
+        // 将city存入store
         this.$store.dispatch('saveCity', this.city).then(
           () => {
-            console.log('ok in city comp');
-            localStorage.setItem('city', JSON.stringify(this.city));
+            localStorage.setItem('city', JSON.stringify(this.city)); // 将city存入本地
           },
           err => {
             console.log(err || '地址存入失败');
           }
         );
-        console.log('ok in city comp, cityflag=', this.cityflag);
-        this.backToAddress();
+        this.backToAddress(); // 返回地址组件
       }
     },
   },
   created() {
-    console.log('select city page, store.state=', this.$store.getters);
-    let store = this.$store.getters;
+    let store = this.$store.state.user;
+    // 从store中取出city
     if (store.city) {
       this.city = store.city;
       this.cityflag = true;
     } else {
-      this.cityflag = false;
       this.city = '选择城市';
+      this.cityflag = false;
     }
   },
 }
