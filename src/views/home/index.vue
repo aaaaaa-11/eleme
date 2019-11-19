@@ -1,24 +1,21 @@
 <template>
   <div :class="prefixCls">
     <!-- 首页 -->
-    <div :class="{'unscrollable':showAddrFlag}">
+    <div :class="{'unscrollable':showAddrFlag, 'showSelectStorePopup':showSelectStore}">
       <!-- header -->
       <div :class="`${prefixCls}-header`">
-        <div ref="header" @click="showAddress" :class="`${prefixCls}-header__title`">
+        <div @click="showAddress" :class="`${prefixCls}-header__title`">
           <van-icon name="location-o" />
           <h3 class="text-overflow">{{address}}</h3>
           <span class="triangle"></span>
-          <!-- <router-link to="/home/address"></router-link> -->
         </div>
         <!-- search -->
         <van-sticky>
           <div :class="`${prefixCls}-header__search`">
-            <router-link to="/search">
-              <div>
-                <van-icon name="search" />
-                <span>搜索饿了么商家、商品名称</span>
-              </div>
-            </router-link>
+            <div @click="goToSearch">
+              <van-icon name="search" />
+              <span>搜索饿了么商家、商品名称</span>
+            </div>
           </div>
         </van-sticky>
       </div>
@@ -29,26 +26,17 @@
         <button @click="showAddress" class="v-button v-button--success v-button--normal">手动选择地址</button>
       </div>
 
+      <!-- 获取到地址 -->
       <div v-else>
         <!-- swipe -->
         <div :class="`${prefixCls}-swipe`">
-          <van-swipe :autoplay="3000" indicator-color="yellow">
-            <van-swipe-item>
+          <van-swipe indicator-color="yellow">
+            <van-swipe-item  v-for="swipeItem in 2" :key="swipeItem">
               <div :class="`${prefixCls}-swipe-list active`">
-                <van-grid :column-num="5" v-for="(item, i) in list1" :key="i">
+                <van-grid :column-num="5" v-for="gridItem in 10" :key="gridItem">
                   <van-grid-item :class="`${prefixCls}-swipe-list__item`" use-slot>
                     <img src="../../assets/imgs/home/1.webp" />
-                    <p>{{ item.text }}</p>
-                  </van-grid-item>
-                </van-grid>
-              </div>
-            </van-swipe-item>
-            <van-swipe-item>
-              <div :class="`${prefixCls}-swipe-list active`">
-                <van-grid :column-num="5" v-for="(item, i) in list2" :key="i">
-                  <van-grid-item :class="`${prefixCls}-swipe-list__item`" use-slot>
-                    <img src="../../assets/imgs/home/1.webp" />
-                    <p>{{ item.text }}</p>
+                    <p>外卖</p>
                   </van-grid-item>
                 </van-grid>
               </div>
@@ -75,11 +63,9 @@
             <p class="bold">超级会员</p>
             <span>·</span>
             <p class="font-sm">每月领20元红包</p>
-            <span class="font-sm span-right">
-              <router-link to="/supervip">
-                立即开通
-                <van-icon class="font-sm arrow-right" name="arrow" />
-              </router-link>
+            <span class="font-sm span-right" @click="goToSvip">
+              立即开通
+              <van-icon class="font-sm arrow-right" name="arrow" />
             </span>
           </div>
         </div>
@@ -90,7 +76,7 @@
           </div>
           <!-- 筛选tabbar -->
           <div :class="`${prefixCls}-shop-nav text--center`">
-            <van-tabbar :fixed=false active-color="#333" v-model="navbarActive">
+            <van-tabbar :fixed="false" active-color="#333" v-model="navbarActive">
               <van-tabbar-item>
                 <van-dropdown-menu>
                   <van-dropdown-item v-model="recommendShopSelect" :options="recommShopNavOption" />
@@ -106,29 +92,12 @@
                         <p class="title">商家服务（可多选）</p>
                         <div class="content">
                           <van-row>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/fengniao.webp" alt />蜂鸟专送
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/isBrand.webp" alt />品牌商家
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/newStore.webp" alt />新店
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/isFoodEnsure.webp" alt />食安保
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/invoice.webp" alt />开发票
+                            <van-col span="8" v-for="(item, index) in servicesList" :key="index">
+                              <div :class="item.checked ? 'perSpend-item__active' : null">
+                                <label :for="item.name">
+                                  <img :src="item.src" />{{item.text}}
+                                  <input :id="item.name" type="checkbox" v-model="item.checked">
+                                </label>
                               </div>
                             </van-col>
                           </van-row>
@@ -136,194 +105,67 @@
                         <p class="title">优惠活动（单选）</p>
                         <div class="content">
                           <van-row>
-                            <van-col span="8">
-                              <div>首单立减</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>门店新客立减</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>满减优惠</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>下单返红包</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>进店领红包</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>配送费优惠</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>赠品优惠</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>特价商品</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>品质联盟红包</div>
+                            <van-col span="8" v-for="(item, index) in preferentialAtvList" :key="index">
+                              <div @click="preferentialActive=index" :class="preferentialActive===index ? 'perSpend-item__active' : null">
+                                <label :for="item">{{item}}
+                                  <input type="radio" name="preferential" :id="item">
+                                </label>
+                              </div>
                             </van-col>
                           </van-row>
                         </div>
                         <p class="title">人均消费</p>
                         <div class="content">
                           <van-row>
-                            <van-col span="8">
-                              <div>￥20以下</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥20-￥40</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥40-￥60</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥60-￥80</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥80-￥100</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥100以上</div>
+                            <van-col span="8" v-for="(item, index) in perSpendList" :key="index">
+                              <div @click="perSpendActive=index" :class="perSpendActive===index ? 'perSpend-item__active' : null">
+                                <label :for="item.text">{{item.text}}
+                                  <input type="radio" v-model="perSpendListChecked" :value="item.checked" name="preSpend" :id="item.text" />
+                                </label>
+                              </div>
                             </van-col>
                           </van-row>
                         </div>
                       </div>
                       <div class="btnBox">
-                        <button class="clear box">清空</button>
-                        <van-button block type="info">确认</van-button>
+                        <button @click="clearSelect" class="clear box">清空</button>
+                        <van-button block type="info" @click="getSelectResult=true">确认</van-button>
                       </div>
                     </div>
                   </van-dropdown-item>
                 </van-dropdown-menu>
               </div>
             </van-tabbar>
-            <!-- <ul class="navBar">
-              <li :class="`${prefixCls}-shop-nav--active comEvaluation`">
-                <van-dropdown-menu>
-                  <van-dropdown-item v-model="recommendShopSelect" :options="recommShopNavOption" />
-                </van-dropdown-menu>
-              </li>
-              <li>
-                <a href="javascript:;">距离最近</a>
-              </li>
-              <li>
-                <a href="javascript:;">品质联盟</a>
-              </li>
-              <li class="selectStore" @click="toggleSelectStore">
-                <van-dropdown-menu class="selectStore-dropDown-menu"><van-icon name="filter-o" />
-                  <van-dropdown-item title="筛选" ref="item">
-                    <div class="selectStore-extend" v-if="showSelectStore">
-                      <div class="selectStore-extend__content">
-                        <p class="title">商家服务（可多选）</p>
-                        <div class="content">
-                          <van-row>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/fengniao.webp" alt />蜂鸟专送
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/isBrand.webp" alt />品牌商家
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/newStore.webp" alt />新店
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/isFoodEnsure.webp" alt />食安保
-                              </div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>
-                                <img src="../../assets/imgs/home/invoice.webp" alt />开发票
-                              </div>
-                            </van-col>
-                          </van-row>
-                        </div>
-                        <p class="title">优惠活动（单选）</p>
-                        <div class="content">
-                          <van-row>
-                            <van-col span="8">
-                              <div>首单立减</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>门店新客立减</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>满减优惠</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>下单返红包</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>进店领红包</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>配送费优惠</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>赠品优惠</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>特价商品</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>品质联盟红包</div>
-                            </van-col>
-                          </van-row>
-                        </div>
-                        <p class="title">人均消费</p>
-                        <div class="content">
-                          <van-row>
-                            <van-col span="8">
-                              <div>￥20以下</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥20-￥40</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥40-￥60</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥60-￥80</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥80-￥100</div>
-                            </van-col>
-                            <van-col span="8">
-                              <div>￥100以上</div>
-                            </van-col>
-                          </van-row>
-                        </div>
-                      </div>
-                      <div class="btnBox">
-                        <button class="clear box">清空</button>
-                        <van-button block type="info">确认</van-button>
-                      </div>
-                    </div>
-                  </van-dropdown-item>
-                </van-dropdown-menu>
-              </li>
-            </ul> -->
           </div>
-          <div v-if="user" :class="`${prefixCls}-shop-list`">
-            <section v-for="(item, index) in stores" :key="index" class="item">
+          <!-- 未登录 -->
+          <div v-if="!user" :class="`${prefixCls}-noshoplist`">
+            <img src="../../assets/imgs/home/toLogin.png" alt />
+            <p class="noresult">没有结果</p>
+            <p class="info">登录后查看更多商家</p>
+            <button @click="login" class="v-button v-button--success v-button--normal">登录</button>
+          </div>
+          <!-- 登录了且请求到商家数据 -->
+          <div v-else-if="user&&stores.length" :class="`${prefixCls}-shop-list`">
+            <section @click.stop="getFood(index)" v-for="(item, index) in stores" :key="index" :class="`${prefixCls}-shop-list__item`">
               <div class="img">
                 <img src="../../assets/imgs/home/shop1.webp" alt />
               </div>
-              <div :class="`${prefixCls}-shop-list__content`">
+              <div class="content">
                 <div class="shop-title">
                   <p class="text-overflow">
                     <span class="isBrand" v-if="item.isBrand">品牌</span>
                     {{ item.name }}
                   </p>
-                  <van-cell @click="showPopup">□···</van-cell>
-                  <van-popup v-model="showDislike">不喜欢</van-popup>
+                  <van-cell @click.stop="showPopup">□···</van-cell>
+                  <van-popup
+                    @click.stop="showPopup"
+                    @click-overlay="getFoodFlag=false"
+                    @closed="getFoodFlag=true"
+                    v-model="showDislike"
+                    :lock-scroll="false"
+                    :close-on-popstate="true"
+                  >不喜欢
+                  </van-popup>
                 </div>
                 <div class="rate">
                   <van-rate :size="10" v-model="rate" readonly />
@@ -355,24 +197,24 @@
                     口碑人气好店
                   </span>
                 </div>
-                <div class="activites" v-if="item.activities">
-                  <section>
+                <div class="activities" v-if="item.activities">
+                  <!-- <section> -->
                     <!-- n个活动（大于2个时显示） -->
                     <div
                       v-if="showActivitiesNumber(item)"
-                      class="float--right"
-                      @click="toggleShowAllActivities(item)"
+                      class="activities__tips float--right"
+                      @click.stop="toggleShowAllActivities(item)"
                     >
-                      <span class="atvNum">{{ item.activities.length }}个活动</span>
+                      <span class="atvnumber">{{ item.activities.length }}个活动</span>
                       <span :class="{'triangle': true, 'toUp': item.showAllActivities}"></span>
                     </div>
                     <!-- 活动内容 -->
                     <div class="activities__content">
                       <!-- item.activities -->
                       <p
-                        :class="{'text-overflow': true, 'display-none': hiddenMoreActivities(item, idx,)}"
                         v-for="(atvItem, idx) in item.activities"
                         :key="idx"
+                        :class="{'text-overflow': true, 'display-none': hiddenMoreActivities(item, idx)}"
                       >
                         <span v-if="!atvItem.iconName">保</span>
                         <span
@@ -382,21 +224,21 @@
                         {{ atvItem.name }}
                       </p>
                     </div>
-                  </section>
+                  <!-- </section> -->
                 </div>
               </div>
             </section>
           </div>
-          <div v-else :class="`${prefixCls}-noshoplist`">
-            <img src="../../assets/imgs/home/toLogin.png" alt />
-            <p class="noresult">没有结果</p>
-            <p class="info">登录后查看更多商家</p>
-            <button @click="login" class="v-button v-button--success v-button--normal">登录</button>
+          <!-- 登录了未能请求到商家数据 -->
+          <div v-else :class="`${prefixCls}-noStores text--center`">
+            <img src="../../assets/imgs/home/noStores.gif" alt="">
+            <p class="info-nostores">附近没有外卖商家</p>
+            <p class="info">饿了么正在以光速来到你身边</p>
           </div>
-        </div>
-        <!-- 已经加载了所有商家 -->
-        <div :class="`${prefixCls}-noMoreStore box`" v-if="noMoreStores">
-          <p class="text--center">更多商家接入中，敬请期待~</p>
+          <!-- 已经加载了所有商家 -->
+          <div v-if="noMoreStores && stores.length" :class="`${prefixCls}-noMoreStore box`">
+            <p class="text--center">更多商家接入中，敬请期待~</p>
+          </div>
         </div>
         <!-- goTop -->
         <transition name="goTop-fade">
@@ -408,6 +250,7 @@
     </div>
 
     <!-- 选择收货地址 -->
+    <!-- 传递showAddrFlag到子组件中，控制组件动画 -->
     <Address :paramsFromhomeToAddr="showAddrFlag" @getAddrObjFromShowAddr="getAddrObjFromShowAddr"></Address>
   </div>
 </template>
@@ -422,13 +265,30 @@ export default {
   data() {
     return {
       prefixCls,
-      recommendShopSelect: 0, // “推荐商家”nav，默认选项：综合排序
-      showDislike: false, // 是否弹出不喜欢
-      value: 0,
-      switch1: false,
-      switch2: false,
-      switch3: false,
-      container: null,
+      navbarActive: null, // “推荐商家”nav选中项，默认没有选中
+      preferentialActive: -1, // 选中的“优惠活动”项，用来控制选中项改变样式
+      perSpendActive: -1, // 选中的“人均消费”项，用来控制选中项改变样式
+      recommendShopSelect: 0, // “综合评价”下拉菜单选中项，默认：综合评价
+      showSelectStore: false, // 是否显示“筛选”下拉内容
+      showDislike: false, // 是否弹出“不喜欢”
+      getFoodFlag: true, // 能否进入“food”页，默认可以，只有点击关闭“不喜欢”弹出层的一瞬不能触发getFood点击事件
+      servicesList: [ // “商家服务”列表
+        {src: require('../../assets/imgs/home/fengniao.webp'), name: 'fengniao', text: '蜂鸟专送', checked: false},
+        {src: require('../../assets/imgs/home/isBrand.webp'), name: 'isBrand', text: '品牌商家', checked: false},
+        {src: require('../../assets/imgs/home/newStore.webp'), name: 'newStore', text: '新店', checked: false},
+        {src: require('../../assets/imgs/home/isFoodEnsure.webp'), name: 'isFoodEnsure', text: '食安保', checked: false},
+        {src: require('../../assets/imgs/home/invoice.webp'), name: 'invoice', text: '开发票', checked: false},
+      ],
+      preferentialAtvList: ['首单立减', '门店新客立减', '满减优惠', '下单返红包', '进店领红包', '配送费优惠', '赠品优惠', '特价商品', '品质联盟红包'], // 优惠活动
+      perSpendListChecked: -1,  // 选中的“人均消费”项
+      perSpendList: [ // “人均消费”区间集合
+        {text: '￥20以下', checked: {20: 0}},
+        {text: '￥20-￥40', checked: {40: 20}},
+        {text: '￥40-￥60', checked: {60: 40}},
+        {text: '￥60-￥80', checked: {80: 60}},
+        {text: '￥80-￥100', checked: {100: 80}},
+        {text: '￥100以上', checked: {'': 100}},
+      ],
       recommShopNavOption: [ // 推荐商家导航选项
         { text: "综合评价", value: 0 },
         { text: "好评优先", value: 1 },
@@ -440,32 +300,6 @@ export default {
         { text: "人均从高到低", value: 7 },
         { text: "通用排序", value: 8 },
       ],
-      // swipe
-      list1: [
-        { id: 1, text: "美食" },
-        { id: 2, text: "外卖" },
-        { id: 3, text: "外卖" },
-        { id: 4, text: "外卖" },
-        { id: 5, text: "外卖" },
-        { id: 6, text: "外卖" },
-        { id: 7, text: "外卖" },
-        { id: 8, text: "外卖" },
-        { id: 9, text: "外卖" },
-        { id: 10, text: "外卖" }
-      ],
-      list2: [
-        { id: 1, text: "快餐" },
-        { id: 2, text: "外卖" },
-        { id: 3, text: "外卖" },
-        { id: 4, text: "外卖" },
-        { id: 5, text: "外卖" },
-        { id: 6, text: "外卖" },
-        { id: 7, text: "外卖" },
-        { id: 8, text: "外卖" },
-        { id: 9, text: "外卖" },
-        { id: 10, text: "外卖" }
-      ],
-      navbarActive: null,
       stores: [], // 所有商家
       rate: 4.8, // 默认评分
       order: 342, // 默认订单数
@@ -475,11 +309,14 @@ export default {
       addrFlag: false, // 标识符，是否获取到address
       goTopFlag: false, // 标识符，是否置顶
       showAddrFlag: false, // 标识符，是否显示“选择收货地址”页面
-      showSelectStore: false, // 标识符，是否显示“筛选”下拉菜单
+      pageSize: null, // 请求商家数据分页规格，默认为10
       pageIndex: 1, // 请求数据分页页码，默认为1
+      services: [], // 商家服务（筛选）
+      costFrom: null, // 人均消费，最低价
+      costTo: null, // 人均消费，最高价
       ableToGetMoreData: true, // 开关，是否可以请求更多数据
       noMoreStores: false, // 已经请求并加载了所有的商家
-      // servicers: , // 商家服务（筛选）
+      getSelectResult: false, // “筛选”点击确认
     };
   },
   components: {
@@ -491,13 +328,31 @@ export default {
     ])
   },
   watch: {
-    showSelectStore() {
-      console.log(this.showSelectStore);
+    getSelectResult() {
+      if (this.getSelectResult) {
+        this.getSelectStoreData();
+      }
     }
   },
   methods: {
+    showAddress() {  // 显示地址组件
+      // 本页面不可滚动（一屏高），以免在地址组件中显示本页面内容，并跳转到地址页
+      this.showAddrFlag = true;
+    },
+    goToSearch() { // 进入search页面
+      this.$router.push({
+        name: 'search',
+        path: '/search',
+      });
+    },
+    goToSvip() { // 进入超级会员页
+      this.$router.push({
+        name: 'supervip',
+        path: '/supervip'
+      });
+    },
     showPopup() { // 弹出“不喜欢”
-      this.showDislike = true;
+      this.showDislike = !this.showDislike;
     },
     scrollGoTop() { // 滚动是否显示“goTop”元素
       if (window.scrollY > 300) {
@@ -507,11 +362,6 @@ export default {
       }
     },
     showActivitiesNumber(item) { // 活动数量超过2个，显示“n个活动”，否则不显示
-      // let atvLength = item.activities.length;
-      // // 如果有食安保，则活动数量++
-      // if (item.isFoodEnsure) {
-      //   atvLength ++;
-      // }
       if (item.activities.length > 2) {
         return true;
       } else {
@@ -531,10 +381,7 @@ export default {
     login() {  // 跳转到登录页
       this.$router.push("/login");
     },
-    showAddress() {  // 显示地址组件
-      this.showAddrFlag = true;
-    },
-    getAddrObjFromShowAddr(addr, addrFlag) { // 从“选择收货地址”获取到地址数据
+    getAddrObjFromShowAddr(addr, addrFlag) { // 从“选择收货地址”组件获取到地址数据
       this.showAddrFlag = false; // 不显示“收货地址”组件
       this.addrFlag = addrFlag;
       if (addrFlag) {
@@ -545,79 +392,26 @@ export default {
         this.addrFlag = false;
       }
     },
-    // toggleSelectStore() { // 切换“筛选”扩展内容
-    //   // let selectStore = document.getElementById('selectStore')
-    //   // if (this.showSelectStore) {
-    //   //   selectStore.$emit('close');
-    //   // } else {
-    //   //   selectStore.$emit('open');
-    //   // }
-    //   // console.log(this.$refs);
-    //   // this.$refs.item.$emit('click');
-    // },
-    loadMoreStores() { // 下拉到底部加载更多
+    getStores() { // 发起请求获取商家数据
       const _this = this;
-      // 如果下拉到底部&开关打开
-      if (window.scrollY + window.outerHeight >= document.body.clientHeight && _this.ableToGetMoreData) {
-          _this.ableToGetMoreData = false; // 关闭开关
-          _this.pageIndex ++ ; // 页码增加
-          getStores({
-            params: {
-              pageIndex: _this.pageIndex,
-            }
-          }).then(
-            res => {
-              // console.log('loadMoreStoreData, ', res.data);
-              if (res.data.length === 0) { // 如果请求回来的商家数据为空（所有商家数据都请求完了）
-                _this.noMoreStores = true; // 显示页面底部的提示信息
-                _this.loadMoreStores = null; // 下拉加载数据方法失效
-                // console.log('End  _this.noMoreStores=', _this.noMoreStores);
-                return; // 不用再执行接下来的代码了
-              }
-              res.data.map(item => {
-                // 为每个商家添加一个“显示所有活动”的属性，默认不显示多余的活动
-                item.showAllActivities = false;
-                if (item.isFoodEnsure) {
-                  // 把“食安保”加入activities
-                  item.activities.push({
-                    name: "该商户食品安全已由国泰产险承担，食品安全有保障"
-                  });
-                }
-                return item;
-              });
-              res.data.forEach(item => { // 将请求回来的数据遍历存入this.stores中
-                _this.stores.push(item);
-              });
-              _this.ableToGetMoreData = true; // 请求完成后打开开关
-            },
-            err => {
-              console.log(err);
-              _this.ableToGetMoreData = true;
-            }
-          );
-      }
-    },
-  },
-  created() {
-    let store = this.$store.state.user;
-    console.log("home component, store.state.user----", this.$store.state.user);
-    if (this.$store.state.user.address) {
-      // store中的address不为空
-      this.addrFlag = true;
-      this.address = store.address;
-      this.showAddrFlag = false; // 不显示地址组件
-    } else {
-      // 如果没有地址数据，则跳转到“选择收货地址”
-      this.addrFlag = false;
-      this.showAddrFlag = true;
-      this.address = "未能获取地址";
-    }
-    // 有用户信息（登陆后）
-    if (this.user) {
-      // 请求商家数据
-      getStores().then(
+      getStores({
+        params: {
+          pageSize: _this.pageSize,
+          pageIndex: _this.pageIndex,
+          services: _this.services.join(','),
+          costFrom: _this.costFrom,
+          costTo: _this.costTo,
+        }
+      }).then(
         res => {
-          // console.log(res);
+          if (res.data.length === 0) { // 如果请求回来的商家数据为空
+            if (_this.stores.length !== 0) { // 如果之前能请求回来商家数据（所有商家数据都请求完了）
+              _this.noMoreStores = true; // 显示页面底部的提示信息
+              return; // 不用再执行接下来的代码了
+            } else { // 请求不到数据（当地没有商家 || 没有符合筛选条件的商家）
+              return;
+            }
+          }
           res.data.map(item => {
             // 为每个商家添加一个“显示所有活动”的属性，默认不显示多余的活动
             item.showAllActivities = false;
@@ -629,19 +423,101 @@ export default {
             }
             return item;
           });
-          this.stores = res.data;
-          console.log(this.stores);
+          res.data.forEach(item => { // 将请求回来的数据遍历存入this.stores中
+            _this.stores.push(item);
+          });
+          _this.ableToGetMoreData = true; // 请求完成后打开开关
         },
         err => {
           console.log(err);
+          _this.ableToGetMoreData = true;
         }
-      );
+      )
+    },
+    loadStores() { // 下拉到底部加载更多
+      // 如果下拉到底部&开关打开
+      if (window.scrollY + window.outerHeight >= document.body.clientHeight && this.ableToGetMoreData) {
+        this.ableToGetMoreData = false; // 关闭开关
+        this.pageIndex ++ ; // 页码增加
+        this.getStores();
+      }
+    },
+    getSelectStoreData() { // “筛选”确认后请求符合条件的数据
+      this.pageIndex = 1;
+      let count = 0;
+      let servicesNotEmpty = this.servicesList.some(item => { // 判断商家服务是否选了
+        if (item.checked) {
+          return true;
+        }
+      })
+      if (servicesNotEmpty) { // 如果选了商家服务
+        this.servicesList.forEach(item => { // 确认选了哪些商家服务
+          count ++;
+          let servicesItem = item.checked ? count : '0';
+          this.services.push(servicesItem);
+        });
+      }
+      this.costTo = Object.keys(this.perSpendListChecked)[0];
+      this.costFrom = this.perSpendListChecked[this.costTo];
+      this.stores = [];
+      this.getStores();
+      this.showSelectStore = false;
+      this.getSelectResult = false;
+      this.services = [];
+    },
+    clearSelect() { // “清除”按钮（筛选）
+      this.servicesList.map(item => { // 清除“商家服务”选中状态
+        item.checked = false;
+        return item;
+      })
+      this.perSpendListChecked = this.preferentialActive = this.perSpendActive = -1;
+      // this.perSpendList.map(item => {
+      //   item.checked = '';
+      //   return item;
+      // }); // 清除“人均消费”选中状态
+    },
+    getFood(id) {
+      if (this.getFoodFlag) {
+        this.$router.push({
+          name: 'food',
+          params: {
+            id,
+          },
+        });
+      }
+    },
+    closeDislikPopup() { // 如果页面滚动，或点击页面中任意位置，如果“不喜欢”弹出层显示，则关闭
+      if (this.showDislike) {
+        this.showDislike = false;
+      }
+    },
+  },
+  created() {
+    let store = this.$store.state.user;
+    if (this.$store.state.user.address) {  // store中的address不为空
+      this.addrFlag = true;
+      this.address = store.address;
+      this.showAddrFlag = false; // 不显示地址组件
+    } else {  // 如果没有地址数据，则跳转到“选择收货地址”
+      this.addrFlag = false;
+      this.showAddrFlag = true;
+      this.address = "未能获取地址";
+    }
+    // 有用户信息（登陆后）
+    if (this.user) {
+      // 请求商家数据
+      this.getStores();
     }
   },
   mounted() {
     this.scrollGoTop();
     window.addEventListener("scroll", this.scrollGoTop);
-    window.addEventListener('scroll', this.loadMoreStores);
+    if (this.user) {
+      window.addEventListener('scroll', this.loadStores);
+    }
+    ['scroll', 'click'].forEach(item => {
+      window.addEventListener(item, this.closeDislikPopup)
+    })
   }
 };
 </script>

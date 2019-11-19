@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 let config = {
-  baseURL: 'http://192.168.101.4:3000',
+  // baseURL: 'http://192.168.101.4:3000',
   timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
 };

@@ -13,9 +13,7 @@ import User from './views/user/index.vue';
 import Search from './views/search/index.vue';
 import SuperVip from './views/supervip.vue';
 import UserInfo from './views/userInfo/index.vue';
-
-// import SelectAddress from './components/SelectAddress.vue';
-// import SelectCity from './components/SelectCity.vue';
+import Food from './views/food/index.vue';
 
 
 Vue.use(Router);
@@ -34,20 +32,6 @@ const router =  new Router({
           path: '/home',
           name: 'home',
           component: Home,
-          // children: [
-          //   {
-          //     path: '/home/address',
-          //     name: 'selectAddress',
-          //     component: SelectAddress,
-          //     children: [
-          //       {
-          //         path: '/home/address/city',
-          //         name: 'selectCity',
-          //         component: SelectCity,
-          //       }
-          //     ]
-          //   }
-          // ]
         },
         {
           path: '/order',
@@ -86,6 +70,11 @@ const router =  new Router({
       name: 'userInfo',
       component: UserInfo,
     },
+    {
+      path: '/home/food/:id',
+      name: 'food',
+      component: Food,
+    },
   ],
 });
 
@@ -95,17 +84,17 @@ router.beforeEach(function(to, from, next) {
   let user = localStorage.getItem('user'),
       address = localStorage.getItem('address'),
       city = localStorage.getItem('city');
-  // 判断地址信息是否存在
   if (city) {
     city = JSON.parse(city);
     store.dispatch('saveCity', city);
-    if (address) { // 城市存在，才能判断address
-      address = JSON.parse(address);
-      store.dispatch('saveAddress', address);
-      console.log('change router, city&addr=', city, address);
-    }
   } else {
     store.dispatch('saveCity', null);
+  }
+  // 判断地址信息是否存在
+  if (address) {
+    address = JSON.parse(address);
+    store.dispatch('saveAddress', address);
+  } else {
     store.dispatch('saveAddress', null);
   }
   // 判断用户信息是否存在

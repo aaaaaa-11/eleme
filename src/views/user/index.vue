@@ -1,7 +1,7 @@
 <template>
   <div :class="prefixCls">
     <!-- header -->
-    <div :class="`${prefixCls}-header float`" @click="go2Login">
+    <div :class="`${prefixCls}-header float`" @click="go2Login()">
       <div :class="`${prefixCls}-header__img float--left`">
         <img src="../../assets/imgs/user/logo.png" alt="">
       </div>
@@ -111,6 +111,7 @@ export default {
       if (this.user) {
         this.$router.push({
           name: 'userInfo',
+          path: '/userinfo'
         });
       } else {
         this.$router.push({

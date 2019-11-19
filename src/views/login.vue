@@ -155,44 +155,15 @@ export default {
           console.log(err);
         }
       )
-      // this.$axios.post('/user/login', {
-      //   mobile: this.mobile,
-      //   code: this.code
-      // }).then(
-      //   res => {
-      //     if (!res.status) {
-      //       this.$toast(res.msg || '失败');
-      //       return;
-      //     }
-      //     // 登录成功，记录时间
-      //     res.user.date = moment().format('YYYY-MM-DD HH:mm:ss');
-      //     // 将用户信息存入store
-      //     this.$store.dispatch('saveUser', res.user).then(
-      //       () => {
-      //         // 将用户信息和登录时间存入localStorage
-      //         localStorage.setItem('user', JSON.stringify(res.user));
-      //         console.log(this.$store.user);
-      //         // 跳转到用户页面
-      //         this.$router.push({
-      //           path: '/user'
-      //         });
-      //       },
-      //       err => {
-      //         console.log(err);
-      //       }
-      //     )
-      //   },
-      //   err => {
-      //     console.log(err);
-      //   }
-      // ).catch(function(reason) {
-      //   console.log('catch:', reason);
-      // })
     }
   },
   created() {
-    // console.log(this.$route);
-    console.log(typeof this.$store.dispatch);
+    this.$axios.get('/restapi/bgs/poi/search_poi_nearby_alipay?keyword=上海&offset=0&limit=20').then(
+      r => {
+        console.log(r);
+      },
+      err => console.error(err)
+    )
   },
   mounted() {
     console.log(this.$store);

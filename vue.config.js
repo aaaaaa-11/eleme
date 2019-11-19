@@ -6,7 +6,7 @@ module.exports = {
     // 指定子路径。比如，如果你的应用部署在
     // https://www.foobar.com/my-app/
     // 那么将这个值改为 `/my-app/`
-    publicPath: './',　
+    publicPath: process.env.NODE_ENV === "production" ? "./" : "/",　
   
     // 将构建好的文件输出到哪里
     outputDir: 'dist',
@@ -105,7 +105,22 @@ module.exports = {
       https: false,
       hotOnly: false,
       // 查阅 https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/cli-service.md#配置代理
-      proxy: null, // string | Object
+      proxy: {
+        '/restapi': {  //使用"/api"来代替"localhost：8080" 
+          target: 'https://h5.ele.me', //源地址 
+          changeOrigin: true, //改变源 
+          pathRewrite: { 
+            '^/restapi': 'http://localhost:8001/restapi' //路径重写 
+          } 
+        },
+        '/elm': {  //使用"/api"来代替"localhost：8080" 
+          target: 'http://localhost:3000', //源地址 
+          changeOrigin: true, //改变源 
+          pathRewrite: { 
+            '^/elm': 'http://localhost:8001' //路径重写 
+          } 
+        },
+      }, // string | Object
       sockHost: '192.168.101.4:8001',
       before: app => {}
     },

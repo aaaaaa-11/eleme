@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import types from './mutations-type';
-import loginHttp from '../apis/login';
 
 Vue.use(Vuex);
 

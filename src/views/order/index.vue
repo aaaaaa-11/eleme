@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-const prefixCls = 'order';
+const prefixCls = 'order-index';
 export default {
   data() {
     return {
@@ -14,8 +14,13 @@ export default {
   computed: {},
   watch: {},
   methods: {
+   
   },
   created() {
   },
+  mounted() {},
 }
 </script>
+
+<style lang="scss">
+</style>
