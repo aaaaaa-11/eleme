@@ -30,7 +30,7 @@
       <div v-else>
         <!-- swipe -->
         <div :class="`${prefixCls}-swipe`">
-          <van-swipe indicator-color="yellow">
+          <van-swipe indicator-color="yellow" :autoplay="6000">
             <van-swipe-item  v-for="swipeItem in 2" :key="swipeItem">
               <div :class="`${prefixCls}-swipe-list active`">
                 <van-grid :column-num="5" v-for="gridItem in 10" :key="gridItem">
@@ -443,6 +443,7 @@ export default {
       }
     },
     getSelectStoreData() { // “筛选”确认后请求符合条件的数据
+      this.services = [];
       this.pageIndex = 1;
       let count = 0;
       let servicesNotEmpty = this.servicesList.some(item => { // 判断商家服务是否选了
@@ -461,9 +462,8 @@ export default {
       this.costFrom = this.perSpendListChecked[this.costTo];
       this.stores = [];
       this.getStores();
-      this.showSelectStore = false;
+      this.showSelectStore = false; // 收起下拉菜单
       this.getSelectResult = false;
-      this.services = [];
     },
     clearSelect() { // “清除”按钮（筛选）
       this.servicesList.map(item => { // 清除“商家服务”选中状态
@@ -471,12 +471,8 @@ export default {
         return item;
       })
       this.perSpendListChecked = this.preferentialActive = this.perSpendActive = -1;
-      // this.perSpendList.map(item => {
-      //   item.checked = '';
-      //   return item;
-      // }); // 清除“人均消费”选中状态
     },
-    getFood(id) {
+    getFood(id, store) {
       if (this.getFoodFlag) {
         this.$router.push({
           name: 'food',
