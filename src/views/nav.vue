@@ -1,7 +1,7 @@
 <template>
-  <div :class="prefixCls">
+  <div >
   <router-view></router-view>
-  <van-tabbar v-model="active" @change="onChange">
+  <van-tabbar :class="prefixCls" v-model="active" @change="onChange" style="z-index:1000;">
     <van-tabbar-item name="0" :icon="active !== '0' ? 'wap-home-o' : 'wap-home'">首页</van-tabbar-item>
       <van-tabbar-item name="1" :icon="active !== '1' ? 'eye-o' : 'eye'">发现</van-tabbar-item>
       <van-tabbar-item name="2" :icon="active !== '2' ? 'balance-list-o' : 'balance-list'">订单</van-tabbar-item>

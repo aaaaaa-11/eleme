@@ -472,7 +472,7 @@ export default {
       })
       this.perSpendListChecked = this.preferentialActive = this.perSpendActive = -1;
     },
-    getFood(id, store) {
+    getFood(id) {
       if (this.getFoodFlag) {
         this.$router.push({
           name: 'food',

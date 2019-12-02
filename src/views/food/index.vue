@@ -209,7 +209,7 @@ export default {
     };
   },
   computed: {
-    reduceActivities() {
+    reduceActivities() { // 满减活动
       return this.activities.find(item => {
         return item.attribute!==null
       });
@@ -236,7 +236,7 @@ export default {
     },
   },
   created() {
-    console.log(this.activities[0].attribute==={});
+    // 获取食物列表
     getStoreById({
       id: this.$route.params
     }).then(
@@ -251,7 +251,6 @@ export default {
       }
     )
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>

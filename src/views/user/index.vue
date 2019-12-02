@@ -72,26 +72,6 @@
     <div class="profile text--center">
       <p>隐私政策</p>
     </div>
-    <!-- <div :class="`group box`">
-      <div :class="`group-list flex`">
-        <div :class="`group-list__icon`">
-          <img src="../../assets/imgs/user/icon3.jpg" alt="">
-        </div>
-        <div :class="`group-list__title flex-item`">我的地址</div>
-        <div :class="`group-list--right text--info`">
-          <van-icon name="arrow" />
-        </div>
-      </div>
-      <div :class="`group-list flex`">
-        <div :class="`group-list__icon`">
-          <img src="../../assets/imgs/user/icon3.jpg" alt="">
-        </div>
-        <div :class="`group-list__title flex-item`">我的地址</div>
-        <div :class="`group-list--right text--info`">
-          <van-icon name="arrow" />
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 <script>

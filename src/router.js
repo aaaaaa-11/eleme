@@ -79,11 +79,12 @@ const router =  new Router({
 });
 
 router.beforeEach(function(to, from, next) {
-  // 路由跳转前，先拿到本地的用户信息&地址信息
+  // 路由跳转前，先拿到本地的用户信息&地址信息&订单
   // let user = JSON.parse(localStorage.getItem('user'));
   let user = localStorage.getItem('user'),
       address = localStorage.getItem('address'),
-      city = localStorage.getItem('city');
+      city = localStorage.getItem('city'),
+      foods = localStorage.getItem('foods');
   if (city) {
     city = JSON.parse(city);
     store.dispatch('saveCity', city);
@@ -117,6 +118,13 @@ router.beforeEach(function(to, from, next) {
           path: '/user'
         })
       }
+    }
+    // 判断订单是否存在
+    if (foods && foods !== 'undefined') {
+      foods = JSON.parse(foods);
+      store.dispatch('saveFoods', foods);
+    } else {
+      store.dispatch('saveFoods', []);
     }
   }
   next();

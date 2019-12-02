@@ -143,6 +143,10 @@ $border-dotted: 1px dotted $color-border-base;
     width: 7vw;
     height: 7vw;
   }
+  .van-stepper__input[disabled]  {
+    color: $color-text-primary;
+    background-color: #fff;
+  }
   .van-stepper__minus::before, .van-stepper__plus::before {
     width: 3vw;
     height: 0.6vw;

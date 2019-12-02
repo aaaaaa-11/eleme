@@ -23,9 +23,6 @@ export default {
     },
   },
   actions: {
-    // getUser({commit}, params) {
-    //   return loginHttp.login(params);
-    // },
     saveUser({commit}, data) {
       console.log(data);
       commit(types.USER_INFO, data);

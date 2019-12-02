@@ -100,7 +100,7 @@ module.exports = {
     // 配置 webpack-dev-server 行为。
     devServer: {
       open: process.platform === 'darwin',
-      host: '192.168.101.4',
+      // host: '192.168.1.9',
       port: 8001,
       https: false,
       hotOnly: false,
@@ -121,7 +121,7 @@ module.exports = {
           } 
         },
       }, // string | Object
-      sockHost: '192.168.101.4:8001',
+      // sockHost: '192.168.1.9:8001',
       before: app => {}
     },
   
