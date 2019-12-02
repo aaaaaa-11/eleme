@@ -359,10 +359,9 @@ export default {
       let hasSavedFlag = false; // hasSavedFlag: 之前是否添加过该商品
       // 更新当前商家购物车数据
       if (this.foods.length) { // 如果购物车不为空
-        this.foods.map(item => {
+        this.foods.forEach(item => {
           if (food._id === item._id) { // 添加过
             hasSavedFlag = true;
-            return item;
           }
         })
         if (!hasSavedFlag) { // 没添加
@@ -497,12 +496,11 @@ export default {
       this.allFoods.some(item => {
         if (item.id === this.$route.params.id) { // 如果store之前存过当前商家的食物
           this.haveFoodsInCurrStore = true;
-          this.foods = item.foods; // 存储当前商家所有选中食物和食物选中总数
+          this.foods = item.foods[0]; // 存储当前商家所有选中食物和食物选中总数
           this.foodList.map(foodListItem => { // 遍历从后台获取的所有的食物列表
             let count = 0;
             foodListItem.foods.map(innerItem => { // 遍历每个menu对应的食物组
               this.foods.forEach(food => { // 遍历当前商家中选中的所有食物
-                console.log('foods----------', food);
                 if (food._id === innerItem._id) {// 如果当前这道菜被选中过
                   innerItem.count = food.count; // 更新当前这道菜的count
                   count += food.count; // 将食物数量累加到当前menu的count上

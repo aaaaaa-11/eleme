@@ -38,7 +38,6 @@ export default {
   data() {
     return {
       prefixCls,
-      // codeDisabled: true,
       mobile: '',
       code: '', // 验证码
       sendCode: true, // 获取验证码

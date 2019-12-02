@@ -148,6 +148,7 @@
           <div v-else-if="user&&stores.length" :class="`${prefixCls}-shop-list`">
             <section @click.stop="getFood(index)" v-for="(item, index) in stores" :key="index" :class="`${prefixCls}-shop-list__item`">
               <div class="img">
+                <van-tag round type="danger" :class="foods[index].count===0 ? 'display-none' : ''">{{ foods[index].count }}</van-tag>
                 <img src="../../assets/imgs/home/shop1.webp" alt />
               </div>
               <div class="content">
@@ -317,6 +318,7 @@ export default {
       ableToGetMoreData: true, // 开关，是否可以请求更多数据
       noMoreStores: false, // 已经请求并加载了所有的商家
       getSelectResult: false, // “筛选”点击确认
+      foods: [],
     };
   },
   components: {
@@ -328,11 +330,30 @@ export default {
     ])
   },
   watch: {
-    getSelectResult() {
-      if (this.getSelectResult) {
+    getSelectResult(newVal) {
+      if (newVal) {
         this.getSelectStoreData();
       }
-    }
+    },
+    stores(newVal) {
+      if (newVal && newVal.length) {
+        newVal.forEach((item, index) => {
+          this.foods.push({id: index, count: 0});
+        })
+        let storeOrder = this.$store.state.order;
+        if (storeOrder.foods && storeOrder.foods.length) {
+          storeOrder.foods.forEach((item, index) => {
+            let count = 0;
+            item.foods.forEach(innerItem => {
+              innerItem.forEach(food => {
+                count += food.count;
+              })
+              this.foods[index].count = count;
+            })
+          });
+        }
+      }
+    },
   },
   methods: {
     showAddress() {  // 显示地址组件
@@ -489,10 +510,10 @@ export default {
     },
   },
   created() {
-    let store = this.$store.state.user;
-    if (this.$store.state.user.address) {  // store中的address不为空
+    let storeUser = this.$store.state.user;
+    if (storeUser.address) {  // store中的address不为空
       this.addrFlag = true;
-      this.address = store.address;
+      this.address = storeUser.address;
       this.showAddrFlag = false; // 不显示地址组件
     } else {  // 如果没有地址数据，则跳转到“选择收货地址”
       this.addrFlag = false;

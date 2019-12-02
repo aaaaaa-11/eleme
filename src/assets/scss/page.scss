@@ -408,9 +408,15 @@ body {
           padding-left: $space-primary;
           box-sizing: border-box;
           float: left;
+          position: relative;
           img {
             width: 100%;
             border: $border;
+          }
+          .van-tag {
+            position: absolute;
+            right: 0;
+            top: -5px;
           }
         }
         padding: $space-md 0;
