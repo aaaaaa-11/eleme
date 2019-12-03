@@ -11,7 +11,7 @@
 <img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/views/food.png" width="250">
 
 ### 评价
-<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/views/recommend.png" width="250">
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/views/comment.png" width="250">
 
 ***
 
