@@ -1,5 +1,5 @@
 <template>
-  <div :class="prefixCls">
+  <div :class="prefixCls" ref="homeIndex">
     <!-- 首页 -->
     <div :class="{'unscrollable':showAddrFlag, 'showSelectStorePopup':showSelectStore}">
       <!-- header -->
@@ -145,7 +145,7 @@
             <button @click="login" class="v-button v-button--success v-button--normal">登录</button>
           </div>
           <!-- 登录了且请求到商家数据 -->
-          <div v-else-if="user&&stores.length" :class="`${prefixCls}-shop-list`">
+          <div v-else-if="user&&stores.length" :class="`${prefixCls}-shop-list`" ref="stores">
             <section @click.stop="getFood(item._id)" v-for="(item, index) in stores" :key="index" :class="`${prefixCls}-shop-list__item`">
               <div class="img">
                 <van-tag round type="danger" :class="foods[index].count===0 ? 'display-none' : ''">{{ foods[index].count }}</van-tag>
@@ -376,7 +376,8 @@ export default {
       this.showDislike = !this.showDislike;
     },
     scrollGoTop() { // 滚动是否显示“goTop”元素
-      if (window.scrollY > 300) {
+      if (!this.$refs.stores) return;
+      if (this.$refs.homeIndex.scrollTop > this.$refs.stores.offsetTop) {
         this.goTopFlag = true;
       } else {
         this.goTopFlag = false;
@@ -528,12 +529,12 @@ export default {
   },
   mounted() {
     this.scrollGoTop();
-    window.addEventListener("scroll", this.scrollGoTop);
+    this.$refs.homeIndex.addEventListener("scroll", this.scrollGoTop);
     if (this.user) {
       window.addEventListener('scroll', this.loadStores);
     }
     ['scroll', 'click'].forEach(item => {
-      window.addEventListener(item, this.closeDislikPopup)
+      this.$refs.homeIndex.addEventListener(item, this.closeDislikPopup)
     })
   }
 };
