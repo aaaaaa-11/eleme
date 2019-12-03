@@ -2,16 +2,16 @@
 
 ***
 ### 登录页图片
-<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/login.png" width="250">
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/views/login.png" width="250">
 
 ### 商店列表页
-<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/store.png" width="250">
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/views/store.png" width="250">
 
 ### 商店菜单及食物
-<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/food.png" width="250">
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/views/food.png" width="250">
 
 ### 评价
-<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/recommend.png" width="250">
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/views/recommend.png" width="250">
 
 ***
 
