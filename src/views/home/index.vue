@@ -1,7 +1,7 @@
 <template>
   <div :class="prefixCls" ref="homeIndex">
     <!-- 首页 -->
-    <div :class="{'unscrollable':showAddrFlag, 'showSelectStorePopup':showSelectStore}">
+    <div :class="{'unscrollable':showAddrFlag, 'showSelectStorePopup':showSelectStore||showSelectPopup}">
       <!-- header -->
       <div :class="`${prefixCls}-header`">
         <div @click="showAddress" :class="`${prefixCls}-header__title`">
@@ -79,7 +79,7 @@
             <van-tabbar :fixed="false" active-color="#333" v-model="navbarActive">
               <van-tabbar-item>
                 <van-dropdown-menu>
-                  <van-dropdown-item v-model="recommendShopSelect" :options="recommShopNavOption" />
+                  <van-dropdown-item @open="showSelectPopup=true" @close="showSelectPopup=false" v-model="recommendShopSelect" :options="recommShopNavOption" />
                 </van-dropdown-menu>
               </van-tabbar-item>
               <van-tabbar-item>距离最近</van-tabbar-item>
@@ -243,7 +243,7 @@
         </div>
         <!-- goTop -->
         <transition name="goTop-fade">
-          <div v-if="goTopFlag" id="goTop" :class="`${prefixCls}-goTop`">
+          <div v-if="goTopFlag" id="goTop" :class="`${prefixCls}-goTop`" @click="goTop">
             <img src="../../assets/imgs/home/goTop.svg"/>
           </div>
         </transition>
@@ -267,6 +267,7 @@ export default {
     return {
       prefixCls,
       navbarActive: null, // “推荐商家”nav选中项，默认没有选中
+      showSelectPopup: false, // "综合评价"
       preferentialActive: -1, // 选中的“优惠活动”项，用来控制选中项改变样式
       perSpendActive: -1, // 选中的“人均消费”项，用来控制选中项改变样式
       recommendShopSelect: 0, // “综合评价”下拉菜单选中项，默认：综合评价
@@ -356,6 +357,10 @@ export default {
     },
   },
   methods: {
+    // openShopNavDropdown() {
+    //   this.showSelectPopup=true;
+    //   this.showSelectStore=false
+    // },
     showAddress() {  // 显示地址组件
       // 本页面不可滚动（一屏高），以免在地址组件中显示本页面内容，并跳转到地址页
       this.showAddrFlag = true;
@@ -382,6 +387,9 @@ export default {
       } else {
         this.goTopFlag = false;
       }
+    },
+    goTop() {
+      this.$refs.homeIndex.scrollTop = 0;
     },
     showActivitiesNumber(item) { // 活动数量超过2个，显示“n个活动”，否则不显示
       if (item.activities.length > 2) {
@@ -528,7 +536,6 @@ export default {
     }
   },
   mounted() {
-    this.scrollGoTop();
     this.$refs.homeIndex.addEventListener("scroll", this.scrollGoTop);
     if (this.user) {
       window.addEventListener('scroll', this.loadStores);

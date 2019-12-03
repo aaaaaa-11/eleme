@@ -586,7 +586,6 @@ body {
             }
             height: auto;
             .van-dropdown-item {
-              margin-top: $space-sm;
               border-top: $border;
               .van-cell:not(:last-child)::after {
                 border-bottom: none;
@@ -733,7 +732,7 @@ body {
       position: absolute;
     }
     .van-dropdown-item {
-      top: 93px !important; // search和“推荐商家”nav的高度
+      top: 92px !important; // search和“推荐商家”nav的高度
     }
   }
 }
