@@ -538,7 +538,7 @@ export default {
   mounted() {
     this.$refs.homeIndex.addEventListener("scroll", this.scrollGoTop);
     if (this.user) {
-      window.addEventListener('scroll', this.loadStores);
+      this.$refs.homeIndex.addEventListener('scroll', this.loadStores);
     }
     ['scroll', 'click'].forEach(item => {
       this.$refs.homeIndex.addEventListener(item, this.closeDislikPopup)
