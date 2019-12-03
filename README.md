@@ -1,4 +1,33 @@
-# hello-world
+# hello-eleme
+
+***
+### 登录页图片
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/login.png" width="250">
+
+### 商店列表页
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/store.png" width="250">
+
+### 商店菜单及食物
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/food.png" width="250">
+
+### 评价
+<img src="https://github.com/aaaaaa-11/eleme/blob/master/src/assets/imgs/views/recommend.png" width="250">
+
+***
+
+## 实现功能
+  * 注册登录
+  * 商店列表
+  * 商店食物详情
+  * 加入购物车
+  
+***
+## 技术架构
+* vue
+* vuex
+* vue-router
+* sass
+* axios
 
 ## Project setup
 ```

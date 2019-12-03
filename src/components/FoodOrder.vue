@@ -240,7 +240,7 @@ export default {
   },
   watch: {
     count(newVal) {
-      if (newVal === 0) {
+      if (newVal < 0) {
         clearInterval(this.timer);
       }
     },
@@ -283,13 +283,13 @@ export default {
       let that = this;
       if (this.pace > 0) { // 滚动条高度不够，需要向上滚
         that.timer = setInterval(() => {
-          that.smoothUp();
           that.count --;
+          that.smoothUp();
         }, 10);
       } else { // 向下滚
         that.timer = setInterval(() => {
-          that.smoothDown();
           that.count --;
+          that.smoothDown();
         }, 10);
       }
     },

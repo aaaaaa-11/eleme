@@ -237,9 +237,8 @@ export default {
   },
   created() {
     // 获取食物列表
-    getStoreById({
-      id: this.$route.params
-    }).then(
+    console.log('object', this.$route.params);
+    getStoreById(this.$route.params.id).then(
       res => {
         if (!res.status) {
           console.log('失败');

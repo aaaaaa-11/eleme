@@ -146,7 +146,7 @@
           </div>
           <!-- 登录了且请求到商家数据 -->
           <div v-else-if="user&&stores.length" :class="`${prefixCls}-shop-list`">
-            <section @click.stop="getFood(index)" v-for="(item, index) in stores" :key="index" :class="`${prefixCls}-shop-list__item`">
+            <section @click.stop="getFood(item._id)" v-for="(item, index) in stores" :key="index" :class="`${prefixCls}-shop-list__item`">
               <div class="img">
                 <van-tag round type="danger" :class="foods[index].count===0 ? 'display-none' : ''">{{ foods[index].count }}</van-tag>
                 <img src="../../assets/imgs/home/shop1.webp" alt />
