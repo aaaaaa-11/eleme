@@ -120,6 +120,11 @@ export default {
     login() {
       const that = this;
       // 发送“login”请求
+      this.$router.push({
+                name: 'user',
+                path: '/user',
+              })
+              return
       login({
         mobile: that.mobile,
         code: that.code,

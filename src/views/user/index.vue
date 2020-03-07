@@ -34,7 +34,8 @@
       <van-cell-group>
         <van-cell title="我的地址" is-link>
           <div slot="icon">
-            <img src="../../assets/imgs/user/icon3.jpg" alt="">
+            <!-- <img src="../../assets/imgs/user/icon3.jpg" alt=""> -->
+            <span class="icon-addr"><i class="iconfont icon-ziyuan"></i></span>
           </div>
         </van-cell>
       </van-cell-group>
@@ -111,3 +112,15 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+  .user .user-list .icon-addr {
+    display: block;
+    width: 22px;
+    height: 100%;
+    margin-right: 10px;
+    i {
+      font-size: 20px;
+      color: #2395ff;
+    }
+  }
+</style>

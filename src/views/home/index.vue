@@ -257,7 +257,7 @@
 </template>
 <script>
 const prefixCls = "home-index";
-
+// test
 import { mapGetters } from "vuex";
 import moment from "moment";
 import { getStores } from "../../apis";
